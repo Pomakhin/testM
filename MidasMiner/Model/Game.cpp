@@ -15,7 +15,7 @@ Game *Game::m_instance = nullptr;
 static const long C_BOARD_WIDTH = 8;
 static const long C_BOARD_HEIGHT = 8;
 static const long C_MIN_MATCH_COUNT = 3;
-static const long C_OBJECTS_TYPES_COUNT = 6;
+static const long C_OBJECTS_TYPES_COUNT = 5;
 
 Board::Board(long width, long height):
     m_width(width),
@@ -100,6 +100,7 @@ Game::Game():
     m_board(C_BOARD_WIDTH, C_BOARD_HEIGHT)
 {
     generateInitialBoard();
+    
 }
 
 void Game::generateInitialBoard()
@@ -113,20 +114,22 @@ void Game::generateInitialBoard()
         }
     }
     
+    printObjects();
+    
     ObjectsPositionSet l_matchesSet = getObjectsToDelete(true);
     
     if (l_matchesSet.size())
     {
         replaceWithUnique(l_matchesSet);
     }
-    ObjectsPositionList moveContents;
-    if (!getPossibleMove(&moveContents))
+    
+    printObjects();
+    
+    // even though probability is negligible
+    if (!getPossibleMove(nullptr))
     {
-        int i;
-        i = 0;
+        generateInitialBoard();
     }
-    int i;
-    i = 0;
 }
 
 void Game::replaceWithUnique(const ObjectsPositionSet &objectsIds)
@@ -209,101 +212,79 @@ Game::ObjectsPositionSet Game::getObjectsToDelete(bool needCalcScore)
 
 bool Game::getPossibleMove(Game::ObjectsPositionList *moveContents)
 {
-    auto getPossibleMoveForNeighbors = [this](Game::ObjectsPositionList *moveContents)->bool
+    auto getMoveByTwoPoints = [this](const Point &firstPos, const Point &secondPos, Game::ObjectsPositionList *moveContents)->bool
     {
-        auto getMoveForNeighbor = [this](const Point &firstPos, const Point &secondPos, Game::ObjectsPositionList *moveContents)->bool
+        auto getMoveByThreePoints = [this](const Point &firstPos, const Point &secondPos, const Point &candidatePos, Game::ObjectsPositionList *moveContents)->bool
         {
             bool result = false;
-            long typeId = m_board(firstPos);
-            bool horizontal = (firstPos.y == secondPos.y);
-
-            Point beforeFirstPos;
-            beforeFirstPos.x = horizontal ? firstPos.x-1 : firstPos.x;
-            beforeFirstPos.y = horizontal ? firstPos.y : firstPos.y -1;
-            if (m_board.isInside(beforeFirstPos))
+            if (m_board.isInside(candidatePos))
             {
-                auto neighbors = m_board.getNeighbors(beforeFirstPos);
-                if (neighbors.count(typeId) > 1)
+                long typeId = m_board(firstPos);
+                auto neighbors = m_board.getNeighbors(candidatePos);
+                auto range = neighbors.equal_range(typeId);
+                for (auto it = range.first; it != range.second; ++it)
                 {
-                    if (moveContents)
+                    if (it->second != firstPos && it->second != secondPos)
                     {
-                        moveContents->push_back(firstPos);
-                        moveContents->push_back(secondPos);
-                        auto range = neighbors.equal_range(typeId);
-                        for (auto it = range.first; it != range.second; ++it)
+                        if (moveContents)
                         {
-                            if (it->second != firstPos)
-                            {
-                                moveContents->push_back(it->second);
-                                break;
-                            }
+                            moveContents->push_back(firstPos);
+                            moveContents->push_back(secondPos);
+                            moveContents->push_back(it->second);
                         }
+                        result = true;
+                        break;
                     }
-                    result = true;
                 }
             }
-            
-            Point afterSecondPos;
-            afterSecondPos.x = horizontal ? secondPos.x+1 : secondPos.x;
-            afterSecondPos.y = horizontal ? secondPos.y : secondPos.y +1;
-            if (m_board.isInside(afterSecondPos))
-            {
-                auto neighbors = m_board.getNeighbors(afterSecondPos);
-                if (neighbors.count(typeId) > 1)
-                {
-                    if (moveContents)
-                    {
-                        moveContents->push_back(firstPos);
-                        moveContents->push_back(secondPos);
-                        auto range = neighbors.equal_range(typeId);
-                        for (auto it = range.first; it != range.second; ++it)
-                        {
-                            if (it->second != secondPos)
-                            {
-                                moveContents->push_back(it->second);
-                                break;
-                            }
-                        }
-                    }
-                    result = true;
-                }
-            }
-            
             return result;
         };
         
-//        
         bool result = false;
-        for (long y = 0; y < m_board.height() - 1; y++)
+        bool horizontal = (firstPos.y == secondPos.y);
+        bool isNeighbors = (abs(firstPos.x-secondPos.x) + abs(firstPos.y-secondPos.y) == 1);
+
+        if (isNeighbors)
         {
-            for (long x = 0; x < m_board.width() - 1; x++)
+            Point beforeFirstPos(horizontal ? firstPos.x-1 : firstPos.x, horizontal ? firstPos.y : firstPos.y-1);
+            result = getMoveByThreePoints(firstPos, secondPos, beforeFirstPos, moveContents);
+            if (!result)
             {
-                if (m_board(x,y) == m_board(x+1,y))
-                {
-                    result = getMoveForNeighbor(Point(x,y), Point(x+1,y), moveContents);
-                    if (result)
-                    {
-                        return result;
-                    }
-                }
-                
-                if (m_board(x,y) == m_board(x,y+1))
-                {
-                    result = getMoveForNeighbor(Point(x,y), Point(x,y+1), moveContents);
-                    if (result)
-                    {
-                        return result;
-                    }
-                }
+                Point afterSecondPos(horizontal ? secondPos.x+1 : secondPos.x, horizontal ? secondPos.y : secondPos.y+1);
+                result = getMoveByThreePoints(firstPos, secondPos, afterSecondPos, moveContents);
             }
         }
+        else
+        {
+            Point middlePos(horizontal ? firstPos.x+1 : firstPos.x, horizontal ? firstPos.y : firstPos.y+1);
+            result = getMoveByThreePoints(firstPos, secondPos, middlePos, moveContents);
+        }
+        
         return result;
     };
     
-    bool result = getPossibleMoveForNeighbors(moveContents);
-    if (!result)
+    bool result = false;
+    for (long y = 0; y < m_board.height() - 1; y++)
     {
-        //result = getPossibleMoveForDivided(moveContents);
+        for (long x = 0; x < m_board.width() - 1; x++)
+        {
+            Point curPoint(x,y);
+            for (bool horizontal : {false, true})
+            {
+                for (long i = 1; i <= 2; i++)
+                {
+                    Point nextPoint(horizontal ? x+i : x, horizontal ? y : y+i);
+                    if (m_board(curPoint) == m_board(nextPoint))
+                    {
+                        if (getMoveByTwoPoints(curPoint, nextPoint, moveContents))
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+            }
+        }
     }
     return result;
 }
@@ -318,5 +299,6 @@ void Game::printObjects()
         }
         std::cout << '\n';
     }
+    std::cout<<'\n';
 }
 

@@ -68,6 +68,7 @@
 		F04A35611AD0722700B6672C /* MidasMiner */ = {
 			isa = PBXGroup;
 			children = (
+				F09392A01AD33ED500A5EF1E /* View */,
 				F04A35761AD07AD100B6672C /* Model */,
 				F04A35621AD0722700B6672C /* main.cpp */,
 			);
@@ -81,6 +82,13 @@
 				F04A35781AD07AF800B6672C /* Game.h */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		F09392A01AD33ED500A5EF1E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
