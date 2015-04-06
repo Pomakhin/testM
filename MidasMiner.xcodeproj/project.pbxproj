@@ -1,0 +1,270 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F04A35631AD0722700B6672C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F04A35621AD0722700B6672C /* main.cpp */; };
+		F04A356B1AD072CC00B6672C /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04A35691AD072CC00B6672C /* SDL2_image.framework */; };
+		F04A356C1AD072CC00B6672C /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04A356A1AD072CC00B6672C /* SDL2.framework */; };
+		F04A35791AD07AF800B6672C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F04A35771AD07AF800B6672C /* Game.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F04A355D1AD0722700B6672C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F04A355F1AD0722700B6672C /* MidasMiner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MidasMiner; sourceTree = BUILT_PRODUCTS_DIR; };
+		F04A35621AD0722700B6672C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F04A35691AD072CC00B6672C /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
+		F04A356A1AD072CC00B6672C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		F04A35771AD07AF800B6672C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = Game.cpp; path = Model/Game.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		F04A35781AD07AF800B6672C /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Game.h; path = Model/Game.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F04A355C1AD0722700B6672C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F04A356B1AD072CC00B6672C /* SDL2_image.framework in Frameworks */,
+				F04A356C1AD072CC00B6672C /* SDL2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F04A35561AD0722700B6672C = {
+			isa = PBXGroup;
+			children = (
+				F04A35691AD072CC00B6672C /* SDL2_image.framework */,
+				F04A356A1AD072CC00B6672C /* SDL2.framework */,
+				F04A35611AD0722700B6672C /* MidasMiner */,
+				F04A35601AD0722700B6672C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F04A35601AD0722700B6672C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F04A355F1AD0722700B6672C /* MidasMiner */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F04A35611AD0722700B6672C /* MidasMiner */ = {
+			isa = PBXGroup;
+			children = (
+				F04A35761AD07AD100B6672C /* Model */,
+				F04A35621AD0722700B6672C /* main.cpp */,
+			);
+			path = MidasMiner;
+			sourceTree = "<group>";
+		};
+		F04A35761AD07AD100B6672C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F04A35771AD07AF800B6672C /* Game.cpp */,
+				F04A35781AD07AF800B6672C /* Game.h */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F04A355E1AD0722700B6672C /* MidasMiner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F04A35661AD0722700B6672C /* Build configuration list for PBXNativeTarget "MidasMiner" */;
+			buildPhases = (
+				F04A355B1AD0722700B6672C /* Sources */,
+				F04A355C1AD0722700B6672C /* Frameworks */,
+				F04A355D1AD0722700B6672C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MidasMiner;
+			productName = MidasMiner;
+			productReference = F04A355F1AD0722700B6672C /* MidasMiner */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F04A35571AD0722700B6672C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Mikhail Pomakhin";
+				TargetAttributes = {
+					F04A355E1AD0722700B6672C = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = F04A355A1AD0722700B6672C /* Build configuration list for PBXProject "MidasMiner" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F04A35561AD0722700B6672C;
+			productRefGroup = F04A35601AD0722700B6672C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F04A355E1AD0722700B6672C /* MidasMiner */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F04A355B1AD0722700B6672C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F04A35631AD0722700B6672C /* main.cpp in Sources */,
+				F04A35791AD07AF800B6672C /* Game.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F04A35641AD0722700B6672C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F04A35651AD0722700B6672C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F04A35671AD0722700B6672C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F04A35681AD0722700B6672C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F04A355A1AD0722700B6672C /* Build configuration list for PBXProject "MidasMiner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F04A35641AD0722700B6672C /* Debug */,
+				F04A35651AD0722700B6672C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F04A35661AD0722700B6672C /* Build configuration list for PBXNativeTarget "MidasMiner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F04A35671AD0722700B6672C /* Debug */,
+				F04A35681AD0722700B6672C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F04A35571AD0722700B6672C /* Project object */;
+}
