@@ -7,11 +7,11 @@
 //
 
 #include <iostream>
-#include "Model/Game.h"
+#include "GameController.h"
 
 int main(int argc, const char * argv[])
 {
-    Game::getInstanse()->printObjects();
+    GameController::getInstance()->init();
     std::cout << "Hello, World!\n";
     return 0;
 }

@@ -9,106 +9,25 @@
 #include "Game.h"
 
 #include <iostream>
-
-Game *Game::m_instance = nullptr;
-
-static const long C_BOARD_WIDTH = 8;
-static const long C_BOARD_HEIGHT = 8;
-static const long C_MIN_MATCH_COUNT = 3;
-static const long C_OBJECTS_TYPES_COUNT = 5;
-
-Board::Board(long width, long height):
-    m_width(width),
-    m_height(height)
-{
-    m_objects.resize(m_height);
-    for (auto &row : m_objects)
-    {
-        row.resize(m_width);
-    }
-}
-long& Board::operator() (long x, long y)
-{
-    if (y >= m_height ||
-        x >= m_width)
-    {
-        return m_outOfBoardValue;
-    }
-    return m_objects[y][x];
-}
-long Board::operator() (long x, long y) const
-{
-    if (y >= m_height ||
-        x >= m_width)
-    {
-        return long{};
-    }
-    return m_objects[y][x];
-}
-long& Board::operator() (const Point &pos)
-{
-    return operator()(pos.x, pos.y);
-}
-long  Board::operator() (const Point &pos) const
-{
-    return operator()(pos.x, pos.y);
-}
-long Board::width()
-{
-    return m_width;
-}
-long Board::height()
-{
-    return m_height;
-}
-std::multimap<long, Point> Board::getNeighbors(const Point &pos)
-{
-    std::multimap<long, Point> result;
-    if (pos.x > 0)
-    {
-        result.insert(std::make_pair((*this)(pos.x-1, pos.y), Point(pos.x-1, pos.y)));
-    }
-    if (pos.x < m_width - 1)
-    {
-        result.insert(std::make_pair((*this)(pos.x+1, pos.y), Point(pos.x+1, pos.y)));
-    }
-    if (pos.y > 0)
-    {
-        result.insert(std::make_pair((*this)(pos.x, pos.y-1), Point(pos.x, pos.y-1)));
-    }
-    if (pos.y < m_height - 1)
-    {
-        result.insert(std::make_pair((*this)(pos.x, pos.y+1), Point(pos.x, pos.y+1)));
-    }
-    return result;
-}
-bool Board::isInside(const Point &pos)
-{
-    return (pos.x >= 0 && pos.x < m_width && pos.y >= 0 && pos.y < m_height);
-}
-
-Game *Game::getInstanse()
-{
-    if (!m_instance)
-    {
-        m_instance = new Game();
-    }
-    return m_instance;
-}
+#include "Consts.h"
 
 Game::Game():
     m_board(C_BOARD_WIDTH, C_BOARD_HEIGHT)
 {
-    generateInitialBoard();
     
+}
+
+void Game::init()
+{
+    generateInitialBoard();    
 }
 
 void Game::generateInitialBoard()
 {
     srand(static_cast<unsigned>(time(nullptr)));
-    for (long y = 0; y < m_board.height(); y++)
+    for (int y = 0; y < m_board.height(); y++)
     {
-        for (long x = 0; x < m_board.width(); x++)
+        for (int x = 0; x < m_board.width(); x++)
         {
             m_board(x,y) = rand() % C_OBJECTS_TYPES_COUNT + 1; // 0 value means no item on this position
         }
@@ -136,10 +55,10 @@ void Game::replaceWithUnique(const ObjectsPositionSet &objectsIds)
 {
     for (const auto &pos : objectsIds)
     {
-        std::set<long> forbiddenIds;
-        std::multimap<long, Point> neighbors = m_board.getNeighbors(pos);
+        std::set<int> forbiddenIds;
+        std::multimap<int, Point> neighbors = m_board.getNeighbors(pos);
        
-        for (long i = 1; i <= C_OBJECTS_TYPES_COUNT; i++)
+        for (int i = 1; i <= C_OBJECTS_TYPES_COUNT; i++)
         {
             if (neighbors.find(i) == neighbors.end())
             {
@@ -152,9 +71,9 @@ void Game::replaceWithUnique(const ObjectsPositionSet &objectsIds)
 
 Game::ObjectsPositionSet Game::getObjectsToDelete(bool needCalcScore)
 {
-    auto getMatchesByPosition = [this](long x, long y, bool horizontal,  ObjectsPositionSet &matches, std::map<long, long> *sequencesMap)
+    auto getMatchesByPosition = [this](int x, int y, bool horizontal,  ObjectsPositionSet &matches, std::map<int, int> *sequencesMap)
     {
-        long matchCount = 0;
+        int matchCount = 0;
         bool condition = true;
         while (condition)
         {
@@ -175,8 +94,8 @@ Game::ObjectsPositionSet Game::getObjectsToDelete(bool needCalcScore)
                 (*sequencesMap)[matchCount]++;
             }
             
-            long curId = horizontal ? x : y;
-            for (long i = curId; i < curId + matchCount; i++)
+            int curId = horizontal ? x : y;
+            for (int i = curId; i < curId + matchCount; i++)
             {
                 matches.insert((horizontal ? Point(i, y) : Point(x, i)));
             }
@@ -184,13 +103,13 @@ Game::ObjectsPositionSet Game::getObjectsToDelete(bool needCalcScore)
     };
    
     // key - sequence length; value - number of sequences
-    std::map<long, long> sequencesMap;
+    std::map<int, int> sequencesMap;
     
     ObjectsPositionSet horizontalObjects;
     ObjectsPositionSet verticalObjects;
-    for (long y = 0; y < m_board.height(); y++)
+    for (int y = 0; y < m_board.height(); y++)
     {
-        for (long x = 0; x < m_board.width(); x++)
+        for (int x = 0; x < m_board.width(); x++)
         {
             if (horizontalObjects.find(Point(x, y)) == horizontalObjects.end())
             {
@@ -219,7 +138,7 @@ bool Game::getPossibleMove(Game::ObjectsPositionList *moveContents)
             bool result = false;
             if (m_board.isInside(candidatePos))
             {
-                long typeId = m_board(firstPos);
+                int typeId = m_board(firstPos);
                 auto neighbors = m_board.getNeighbors(candidatePos);
                 auto range = neighbors.equal_range(typeId);
                 for (auto it = range.first; it != range.second; ++it)
@@ -264,14 +183,14 @@ bool Game::getPossibleMove(Game::ObjectsPositionList *moveContents)
     };
     
     bool result = false;
-    for (long y = 0; y < m_board.height() - 1; y++)
+    for (int y = 0; y < m_board.height() - 1; y++)
     {
-        for (long x = 0; x < m_board.width() - 1; x++)
+        for (int x = 0; x < m_board.width() - 1; x++)
         {
             Point curPoint(x,y);
             for (bool horizontal : {false, true})
             {
-                for (long i = 1; i <= 2; i++)
+                for (int i = 1; i <= 2; i++)
                 {
                     Point nextPoint(horizontal ? x+i : x, horizontal ? y : y+i);
                     if (m_board(curPoint) == m_board(nextPoint))
@@ -291,9 +210,9 @@ bool Game::getPossibleMove(Game::ObjectsPositionList *moveContents)
 
 void Game::printObjects()
 {
-    for (long y = 0; y < m_board.height(); y++)
+    for (int y = 0; y < m_board.height(); y++)
     {
-        for (long x = 0; x < m_board.width(); x++)
+        for (int x = 0; x < m_board.width(); x++)
         {
             std::cout << m_board(x,y) << " ";
         }

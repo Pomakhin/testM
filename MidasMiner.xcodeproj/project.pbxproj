@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CED2CB581AD3F0F300D343F6 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED2CB561AD3F0F300D343F6 /* TextureManager.cpp */; };
+		CED2CB601AD40C9700D343F6 /* BackGround.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5A1AD40C6D00D343F6 /* BackGround.jpg */; };
+		CED2CB611AD40C9700D343F6 /* Purple.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5B1AD40C6D00D343F6 /* Purple.png */; };
+		CED2CB621AD40C9700D343F6 /* Green.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5C1AD40C6D00D343F6 /* Green.png */; };
+		CED2CB631AD40C9700D343F6 /* Red.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5D1AD40C6D00D343F6 /* Red.png */; };
+		CED2CB641AD40C9700D343F6 /* Yellow.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5E1AD40C6D00D343F6 /* Yellow.png */; };
+		CED2CB651AD40C9700D343F6 /* Blue.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5F1AD40C6D00D343F6 /* Blue.png */; };
+		CED2CB681AD40EBD00D343F6 /* GameView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED2CB661AD40EBD00D343F6 /* GameView.cpp */; };
+		CED2CB6C1AD40FA600D343F6 /* GameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED2CB6A1AD40FA600D343F6 /* GameController.cpp */; };
+		CED2CB731AD41D2500D343F6 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED2CB711AD41D2500D343F6 /* GameObject.cpp */; };
+		CED2CB7B1AD42BB500D343F6 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED2CB791AD42BB500D343F6 /* Utils.cpp */; };
 		F04A35631AD0722700B6672C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F04A35621AD0722700B6672C /* main.cpp */; };
 		F04A356B1AD072CC00B6672C /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04A35691AD072CC00B6672C /* SDL2_image.framework */; };
 		F04A356C1AD072CC00B6672C /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04A356A1AD072CC00B6672C /* SDL2.framework */; };
@@ -16,16 +27,40 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		F04A355D1AD0722700B6672C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				CED2CB601AD40C9700D343F6 /* BackGround.jpg in CopyFiles */,
+				CED2CB611AD40C9700D343F6 /* Purple.png in CopyFiles */,
+				CED2CB621AD40C9700D343F6 /* Green.png in CopyFiles */,
+				CED2CB631AD40C9700D343F6 /* Red.png in CopyFiles */,
+				CED2CB641AD40C9700D343F6 /* Yellow.png in CopyFiles */,
+				CED2CB651AD40C9700D343F6 /* Blue.png in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CED2CB561AD3F0F300D343F6 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureManager.cpp; path = View/TextureManager.cpp; sourceTree = "<group>"; };
+		CED2CB571AD3F0F300D343F6 /* TextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureManager.h; path = View/TextureManager.h; sourceTree = "<group>"; };
+		CED2CB5A1AD40C6D00D343F6 /* BackGround.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = BackGround.jpg; path = Textures/BackGround.jpg; sourceTree = "<group>"; };
+		CED2CB5B1AD40C6D00D343F6 /* Purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Purple.png; path = Textures/Purple.png; sourceTree = "<group>"; };
+		CED2CB5C1AD40C6D00D343F6 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Green.png; path = Textures/Green.png; sourceTree = "<group>"; };
+		CED2CB5D1AD40C6D00D343F6 /* Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Red.png; path = Textures/Red.png; sourceTree = "<group>"; };
+		CED2CB5E1AD40C6D00D343F6 /* Yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Yellow.png; path = Textures/Yellow.png; sourceTree = "<group>"; };
+		CED2CB5F1AD40C6D00D343F6 /* Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Blue.png; path = Textures/Blue.png; sourceTree = "<group>"; };
+		CED2CB661AD40EBD00D343F6 /* GameView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameView.cpp; path = View/GameView.cpp; sourceTree = "<group>"; };
+		CED2CB671AD40EBD00D343F6 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameView.h; path = View/GameView.h; sourceTree = "<group>"; };
+		CED2CB6A1AD40FA600D343F6 /* GameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameController.cpp; path = Controller/GameController.cpp; sourceTree = "<group>"; };
+		CED2CB6B1AD40FA600D343F6 /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameController.h; path = Controller/GameController.h; sourceTree = "<group>"; };
+		CED2CB6F1AD410B800D343F6 /* GenericSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericSingleton.h; path = Utils/GenericSingleton.h; sourceTree = "<group>"; };
+		CED2CB711AD41D2500D343F6 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameObject.cpp; path = View/GameObject.cpp; sourceTree = "<group>"; };
+		CED2CB721AD41D2500D343F6 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameObject.h; path = View/GameObject.h; sourceTree = "<group>"; };
+		CED2CB771AD425F400D343F6 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Consts.h; path = Model/Consts.h; sourceTree = "<group>"; };
+		CED2CB791AD42BB500D343F6 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utils.cpp; path = Utils/Utils.cpp; sourceTree = "<group>"; };
+		CED2CB7A1AD42BB500D343F6 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = "<group>"; };
 		F04A355F1AD0722700B6672C /* MidasMiner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MidasMiner; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04A35621AD0722700B6672C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F04A35691AD072CC00B6672C /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
@@ -47,6 +82,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CED2CB591AD40C2F00D343F6 /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				CED2CB5A1AD40C6D00D343F6 /* BackGround.jpg */,
+				CED2CB5B1AD40C6D00D343F6 /* Purple.png */,
+				CED2CB5C1AD40C6D00D343F6 /* Green.png */,
+				CED2CB5D1AD40C6D00D343F6 /* Red.png */,
+				CED2CB5E1AD40C6D00D343F6 /* Yellow.png */,
+				CED2CB5F1AD40C6D00D343F6 /* Blue.png */,
+			);
+			name = Textures;
+			sourceTree = "<group>";
+		};
+		CED2CB691AD40F4100D343F6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CED2CB6A1AD40FA600D343F6 /* GameController.cpp */,
+				CED2CB6B1AD40FA600D343F6 /* GameController.h */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		CED2CB6D1AD4105D00D343F6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CED2CB6F1AD410B800D343F6 /* GenericSingleton.h */,
+				CED2CB791AD42BB500D343F6 /* Utils.cpp */,
+				CED2CB7A1AD42BB500D343F6 /* Utils.h */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		F04A35561AD0722700B6672C = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +135,9 @@
 		F04A35611AD0722700B6672C /* MidasMiner */ = {
 			isa = PBXGroup;
 			children = (
+				CED2CB6D1AD4105D00D343F6 /* Utils */,
+				CED2CB691AD40F4100D343F6 /* Controller */,
+				CED2CB591AD40C2F00D343F6 /* Textures */,
 				F09392A01AD33ED500A5EF1E /* View */,
 				F04A35761AD07AD100B6672C /* Model */,
 				F04A35621AD0722700B6672C /* main.cpp */,
@@ -80,6 +150,7 @@
 			children = (
 				F04A35771AD07AF800B6672C /* Game.cpp */,
 				F04A35781AD07AF800B6672C /* Game.h */,
+				CED2CB771AD425F400D343F6 /* Consts.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -87,6 +158,12 @@
 		F09392A01AD33ED500A5EF1E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CED2CB561AD3F0F300D343F6 /* TextureManager.cpp */,
+				CED2CB571AD3F0F300D343F6 /* TextureManager.h */,
+				CED2CB661AD40EBD00D343F6 /* GameView.cpp */,
+				CED2CB671AD40EBD00D343F6 /* GameView.h */,
+				CED2CB711AD41D2500D343F6 /* GameObject.cpp */,
+				CED2CB721AD41D2500D343F6 /* GameObject.h */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -147,8 +224,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED2CB6C1AD40FA600D343F6 /* GameController.cpp in Sources */,
 				F04A35631AD0722700B6672C /* main.cpp in Sources */,
+				CED2CB7B1AD42BB500D343F6 /* Utils.cpp in Sources */,
+				CED2CB731AD41D2500D343F6 /* GameObject.cpp in Sources */,
 				F04A35791AD07AF800B6672C /* Game.cpp in Sources */,
+				CED2CB681AD40EBD00D343F6 /* GameView.cpp in Sources */,
+				CED2CB581AD3F0F300D343F6 /* TextureManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
