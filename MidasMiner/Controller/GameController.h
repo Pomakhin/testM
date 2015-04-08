@@ -15,6 +15,8 @@
 class GameController : public Singleton<GameController>
 {
     friend class Singleton<GameController>;
+private:
+    void handleEvents();    
 protected:
     GameController(){};
 public:

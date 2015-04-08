@@ -12,28 +12,38 @@
 #include <stdio.h>
 #include "GenericSingleton.h"
 #include <list>
+#include "Game.h"
 
 class SDL_Window;
 class SDL_Renderer;
-class GameObject;
+class BaseGameObject;
 
-class GameView : public Singleton<GameView>
+class GameView : public Singleton<GameView>, Observer
 {
     friend class Singleton<GameView>;
 private:
     bool m_running = false;
+    bool m_swapInProgress = false;
     SDL_Window* m_pWindow = 0;
     SDL_Renderer* m_pRenderer = 0;
-    std::list<GameObject *> m_objects;
+    std::map<Point, std::unique_ptr<BaseGameObject> > m_objects;
+    std::pair<bool, Point> m_selected;
+    
+    void clearSelection();
 protected:
-    GameView(){};
+    GameView();
 public:
+    void onInitBoard() override;
+    void onSelectObject(const Point &pos) override;
+    void onSwapObjects(const Point &firstPos, const Point &secondPos) override;
+    void onRemoveObjects() override;
+    
     void init();
     void render();
     void update();
-    void handleEvents();
     void clean();
     bool isRunning() {return m_running;}
+    bool pixelPosToBoardPos(const Point &pixelPos, Point &boardPos);
 };
 
 #endif /* defined(__MidasMiner__GameView__) */

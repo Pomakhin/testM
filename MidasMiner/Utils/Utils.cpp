@@ -7,6 +7,7 @@
 //
 
 #include "Utils.h"
+#include <cstdlib>
 
 Board::Board(int width, int height):
 m_width(width),
@@ -76,4 +77,19 @@ std::multimap<int, Point> Board::getNeighbors(const Point &pos)
 bool Board::isInside(const Point &pos)
 {
     return (pos.x >= 0 && pos.x < m_width && pos.y >= 0 && pos.y < m_height);
+}
+
+bool Board::areNeighbors(const Point &first, const Point &second)
+{
+    if (first.x == second.x &&
+        std::abs(first.y - second.y) == 1)
+    {
+        return true;
+    }
+    if (first.y == second.y &&
+        std::abs(first.x - second.x) == 1)
+    {
+        return true;
+    }
+    return false;
 }

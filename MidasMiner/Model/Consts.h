@@ -13,12 +13,14 @@
 #include <string>
 #include "Utils.h"
 
-static const long C_BOARD_WIDTH = 8;
-static const long C_BOARD_HEIGHT = 8;
-static const long C_MIN_MATCH_COUNT = 3;
-static const long C_OBJECTS_TYPES_COUNT = 5;
+static const int C_BOARD_WIDTH = 8;
+static const int C_BOARD_HEIGHT = 8;
+static const int C_MIN_MATCH_COUNT = 3;
+static const int C_OBJECTS_TYPES_COUNT = 5;
 static const Point C_BOARD_TOP_LEFT(335, 110);
-static const long C_OBJECT_SIZE = 40;
+static const int C_OBJECT_SIZE = 40;
+static const float C_GRAVITATIONAL_ACCELERATION = 0.4f;
+static const float C_BASE_SPEED = 2.0f;
 
 static const std::map<int,std::string> C_TYPES_MAP =
 {

@@ -12,10 +12,15 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Consts.h"
-#include "Game.h"
+#include <cassert>
+
+GameView::GameView()
+{
+}
 
 void GameView::init()
 {
+    Game::getInstance()->registerObserver(this);
     // initialize SDL
     if(SDL_Init(SDL_INIT_EVERYTHING) >= 0)
     {
@@ -32,6 +37,14 @@ void GameView::init()
                 SDL_SetRenderDrawColor(m_pRenderer,
                                        255,255,255,255);
             }
+            
+            SDL_Rect rect;
+            rect.x = C_BOARD_TOP_LEFT.x - 2;
+            rect.y = C_BOARD_TOP_LEFT.y - 2;
+            rect.w = 320;
+            rect.h = 320;
+            SDL_RenderSetClipRect(m_pRenderer, &rect);
+            
             m_running = true;
         }
     }
@@ -43,40 +56,34 @@ void GameView::init()
     TextureManager::getInstance()->load("Red.png", "Red", m_pRenderer);
     TextureManager::getInstance()->load("Yellow.png", "Yellow", m_pRenderer);
     
-    const Board &board = Game::getInstance()->getBoard();
-    
-    int y = C_BOARD_TOP_LEFT.y;
-    for (int i = 0; i < board.height(); i++)
-    {
-        int x = C_BOARD_TOP_LEFT.x;
-        for (int j = 0; j < board.height(); j++)
-        {
-            GameObject *obj = new GameObject();
-            obj->load(x, y, C_TYPES_MAP.at(board(j,i)));
-            m_objects.push_back(obj);
-            x += C_OBJECT_SIZE;
-        }
-        y += C_OBJECT_SIZE;
-    }
 }
-
 
 void GameView::render()
 {
     SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
-    TextureManager::getInstance()->draw("BG", 0, 0, 755, 600, m_pRenderer);
-    for (auto obj : m_objects)
+    TextureManager::getInstance()->draw("BG", 0, 0, m_pRenderer);
+    for (const auto &pair : m_objects)
     {
-        obj->draw(m_pRenderer);
+        pair.second->draw(m_pRenderer);
     }
     SDL_RenderPresent(m_pRenderer); // draw to the screen
 }
 
 void GameView::update()
 {
-    for (auto obj : m_objects)
+    bool hasMotion = false;
+    for (const auto &pair : m_objects)
     {
-        obj->update();
+        if (pair.second->update())
+        {
+            hasMotion = true;
+        }
+    }
+    
+    if (m_swapInProgress && !hasMotion)
+    {
+        m_swapInProgress = false;
+        Game::getInstance()->onEndSwapping();
     }
 }
 
@@ -88,18 +95,98 @@ void GameView::clean()
     SDL_Quit();
 }
 
-void GameView::handleEvents()
+void GameView::onInitBoard()
 {
-    SDL_Event event;
-    if(SDL_PollEvent(&event))
+    m_objects.clear();
+    const Board &board = Game::getInstance()->getBoard();
+    
+    int y = C_BOARD_TOP_LEFT.y;
+    for (int i = 0; i < board.height(); i++)
     {
-        switch (event.type)
+        int x = C_BOARD_TOP_LEFT.x;
+        for (int j = 0; j < board.height(); j++)
         {
-            case SDL_QUIT:
-                m_running = false;
-                break;
-            default:
-                break;
+            m_objects[Point(j,i)].reset(new GameObject());
+            m_objects[Point(j,i)]->load(Point(x, y), C_TYPES_MAP.at(board(j,i)));
+            x += C_OBJECT_SIZE;
+        }
+        y += C_OBJECT_SIZE;
+    }
+}
+
+void GameView::clearSelection()
+{
+    if (m_selected.first)
+    {
+        auto it = m_objects.find(m_selected.second);
+        if (it != m_objects.end())
+        {
+            Point oldPos = it->second->getPos();
+            it->second.reset(new GameObject());
+            const Board &board = Game::getInstance()->getBoard();
+            it->second->load(oldPos, C_TYPES_MAP.at(board(it->first)));
+            m_selected.first = false;
         }
     }
 }
+
+void GameView::onSelectObject(const Point &pos)
+{
+    clearSelection();
+    auto it = m_objects.find(pos);
+    if (it != m_objects.end())
+    {
+        it->second.reset(new SelectedDecorator(std::move(it->second)));
+        m_selected.first = true;
+        m_selected.second = pos;
+    }
+}
+
+void GameView::onSwapObjects(const Point &firstPos, const Point &secondPos)
+{
+    clearSelection();
+    auto firstIt = m_objects.find(firstPos);
+    auto secondIt = m_objects.find(secondPos);
+    assert(firstIt != m_objects.end());
+    assert(secondIt != m_objects.end());
+    
+    firstIt->second->moveTo(secondIt->second->getPos());
+    secondIt->second->moveTo(firstIt->second->getPos());
+    
+    firstIt->second.swap(secondIt->second);
+    
+    m_swapInProgress = true;
+}
+
+void GameView::onRemoveObjects()
+{
+    const Board &board = Game::getInstance()->getBoard();
+    for (auto it = m_objects.begin(); it != m_objects.end();)
+    {
+        if (board(it->first) == 0)
+        {
+            it = m_objects.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+}
+
+bool GameView::pixelPosToBoardPos(const Point &pixelPos, Point &boardPos)
+{
+    bool result = false;
+    for (const auto &pair : m_objects)
+    {
+        if (pair.second->isIntersect(pixelPos))
+        {
+            boardPos = pair.first;
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
+

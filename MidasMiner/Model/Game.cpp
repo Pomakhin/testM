@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include "Consts.h"
+#include <cassert>
 
 Game::Game():
     m_board(C_BOARD_WIDTH, C_BOARD_HEIGHT)
@@ -20,6 +21,19 @@ Game::Game():
 void Game::init()
 {
     generateInitialBoard();    
+}
+
+void Game::registerObserver(Observer *observer)
+{
+    m_observers.push_back(observer);
+}
+
+void Game::notify(NotifyFunc func)
+{
+    for (auto observer : m_observers)
+    {
+        func(observer);
+    }
 }
 
 void Game::generateInitialBoard()
@@ -35,7 +49,7 @@ void Game::generateInitialBoard()
     
     printObjects();
     
-    ObjectsPositionSet l_matchesSet = getObjectsToDelete(true);
+    ObjectsPositionSet l_matchesSet = getObjectsToRemove(true);
     
     if (l_matchesSet.size())
     {
@@ -49,6 +63,7 @@ void Game::generateInitialBoard()
     {
         generateInitialBoard();
     }
+    notify([](Observer* o){o->onInitBoard();});
 }
 
 void Game::replaceWithUnique(const ObjectsPositionSet &objectsIds)
@@ -69,12 +84,12 @@ void Game::replaceWithUnique(const ObjectsPositionSet &objectsIds)
     }
 }
 
-Game::ObjectsPositionSet Game::getObjectsToDelete(bool needCalcScore)
+Game::ObjectsPositionSet Game::getObjectsToRemove(bool needCalcScore)
 {
     auto getMatchesByPosition = [this](int x, int y, bool horizontal,  ObjectsPositionSet &matches, std::map<int, int> *sequencesMap)
     {
         int matchCount = 0;
-        bool condition = true;
+        bool condition = (m_board(x,y) > 0);
         while (condition)
         {
             matchCount++;
@@ -221,3 +236,85 @@ void Game::printObjects()
     std::cout<<'\n';
 }
 
+void Game::doSwap(const Point &firstPos, const Point &secondPos, const SwapData::SwapState &state)
+{
+    m_selected.first = false;
+    notify([firstPos, secondPos](Observer *o){o->onSwapObjects(firstPos, secondPos);});
+    m_swap.State = state;
+    m_swap.FirstPos = firstPos;
+    m_swap.SecondPos = secondPos;
+    int tempType = m_board(secondPos);
+    m_board(secondPos) = m_board(firstPos);
+    m_board(firstPos) = tempType;
+    m_blockControls = true;
+}
+
+void Game::setSelected(const Point &point)
+{
+    bool needNotify = false;
+    if (m_board.isInside(point))
+    {
+        if (m_selected.first)
+        {
+            if (Board::areNeighbors(m_selected.second, point))
+            {
+                doSwap(m_selected.second, point, SwapData::SwapState::Direct);
+            }
+            else
+            {
+                m_selected.second = point;
+                needNotify = true;
+            }
+        }
+        else
+        {
+            m_selected.first = true;
+            m_selected.second = point;
+            needNotify = true;
+        }
+    }
+    if (needNotify)
+    {
+        notify([point](Observer *o){o->onSelectObject(point);});
+    }
+}
+
+bool Game::getSelected(Point &point)
+{
+    if (m_selected.first)
+    {
+        point = m_selected.second;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Game::onEndSwapping()
+{
+    assert(m_swap.State != SwapData::SwapState::None);
+    m_blockControls = false;
+    if (m_swap.State == SwapData::SwapState::Direct)
+    {
+        ObjectsPositionSet objectsToRemove = getObjectsToRemove(true);
+        if (objectsToRemove.size())
+        {
+            removeObjects(objectsToRemove);
+        }
+        else
+        {
+            doSwap(m_swap.FirstPos, m_swap.SecondPos, SwapData::SwapState::Reverse);
+        }
+    }
+}
+
+void Game::removeObjects(const ObjectsPositionSet &objects)
+{
+    for (const Point &pos : objects)
+    {
+        m_board(pos) = 0;
+    }
+    notify([](Observer *o){o->onRemoveObjects();});
+}

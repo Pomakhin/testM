@@ -36,7 +36,7 @@ bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* pR
     return false;
 }
 
-void TextureManager::draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer)
+void TextureManager::draw(std::string id, int x, int y, SDL_Renderer* pRenderer, int alpha)
 {
     const TextureData &texData = m_textureMap[id];
     SDL_Rect srcRect;
@@ -47,6 +47,8 @@ void TextureManager::draw(std::string id, int x, int y, int width, int height, S
     srcRect.h = destRect.h = texData.Height;
     destRect.x = x;
     destRect.y = y;
+    SDL_SetTextureAlphaMod( texData.SDLTexture, alpha );
     SDL_RenderCopyEx(pRenderer, texData.SDLTexture, &srcRect,
                      &destRect, 0, 0, SDL_FLIP_NONE);
+    SDL_SetTextureAlphaMod( texData.SDLTexture, 255 );
 }

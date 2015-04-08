@@ -57,6 +57,8 @@ public:
     int height() const ;
     std::multimap<int, Point> getNeighbors(const Point &pos);
     bool isInside(const Point &pos);
+    
+    static bool areNeighbors(const Point &first, const Point &second);
 };
 
 #endif /* defined(__MidasMiner__Utils__) */
