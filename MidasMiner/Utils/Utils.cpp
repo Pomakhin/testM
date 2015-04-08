@@ -13,7 +13,7 @@ Board::Board(int width, int height):
 m_width(width),
 m_height(height)
 {
-    m_objects.resize(m_height);
+    m_objects.resize(m_height * 2);
     for (auto &row : m_objects)
     {
         row.resize(m_width);
@@ -22,20 +22,22 @@ m_height(height)
 int& Board::operator() (int x, int y)
 {
     if (y >= m_height ||
-        x >= m_width)
+        x >= m_width ||
+        x < 0)
     {
         return m_outOfBoardValue;
     }
-    return m_objects[y][x];
+    return m_objects[y+m_height][x];
 }
 int Board::operator() (int x, int y) const
 {
     if (y >= m_height ||
-        x >= m_width)
+        x >= m_width ||
+        x < 0)
     {
         return int{};
     }
-    return m_objects[y][x];
+    return m_objects[y+m_height][x];
 }
 int& Board::operator() (const Point &pos)
 {
@@ -81,6 +83,10 @@ bool Board::isInside(const Point &pos)
 
 bool Board::areNeighbors(const Point &first, const Point &second)
 {
+    if (first.y < 0 || second.y < 0)
+    {
+        return false;
+    }
     if (first.x == second.x &&
         std::abs(first.y - second.y) == 1)
     {

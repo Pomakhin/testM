@@ -158,8 +158,9 @@ void GameView::onSwapObjects(const Point &firstPos, const Point &secondPos)
     m_swapInProgress = true;
 }
 
-void GameView::onRemoveObjects()
+void GameView::onRemoveObjects(const ObjectsMovesList &dropsLis)
 {
+    // remove objects
     const Board &board = Game::getInstance()->getBoard();
     for (auto it = m_objects.begin(); it != m_objects.end();)
     {
@@ -172,6 +173,31 @@ void GameView::onRemoveObjects()
             ++it;
         }
     }
+    
+    // drop objects
+    for (const auto &pair : dropsLis)
+    {
+        // TODO:: bug here, need to update position!
+        auto it = m_objects.find(pair.first);
+        if (it == m_objects.end())
+        {
+            m_objects[pair.first].reset(new GameObject());
+            m_objects[pair.first]->load(boardPosToPixelPos(pair.first), C_TYPES_MAP.at(board(pair.first)));
+            m_objects[pair.first]->moveTo(boardPosToPixelPos(pair.second));
+        }
+        else
+        {
+            it->second->moveTo(boardPosToPixelPos(pair.second));
+        }
+    }
+}
+
+Point GameView::boardPosToPixelPos(const Point &boardPos)
+{
+    Point result;
+    result.x = C_BOARD_TOP_LEFT.x + boardPos.x*C_OBJECT_SIZE;
+    result.y = C_BOARD_TOP_LEFT.y + boardPos.y*C_OBJECT_SIZE;
+    return result;
 }
 
 bool GameView::pixelPosToBoardPos(const Point &pixelPos, Point &boardPos)

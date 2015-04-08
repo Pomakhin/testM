@@ -18,20 +18,21 @@
 #include "GenericSingleton.h"
 #include "Utils.h"
 
+typedef std::set<Point > ObjectsPositionSet;
+typedef std::list<std::pair<Point, Point > > ObjectsMovesList;
+
 class Observer
 {
 public:
     virtual void onInitBoard(){};
     virtual void onSelectObject(const Point &pos){};
     virtual void onSwapObjects(const Point &firstPos, const Point &secondPos){};
-    virtual void onRemoveObjects(){};
+    virtual void onRemoveObjects(const ObjectsMovesList &dropsLis){};
 };
 
 class Game : public Singleton<Game>
 {
     friend class Singleton<Game>;
-public:
-    typedef std::set<Point > ObjectsPositionSet;
 private:
     typedef std::list<Point > ObjectsPositionList;
     typedef std::function<void(Observer*)> NotifyFunc;
@@ -55,6 +56,7 @@ private:
     
     std::list<Observer *> m_observers;
     
+    int getRandomObjType();
     void generateInitialBoard();
     ObjectsPositionSet getObjectsToRemove(bool needCalcScore);
     bool getPossibleMove(ObjectsPositionList *moveContents);

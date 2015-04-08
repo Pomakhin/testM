@@ -15,7 +15,7 @@
 Game::Game():
     m_board(C_BOARD_WIDTH, C_BOARD_HEIGHT)
 {
-    
+    srand(static_cast<unsigned>(time(nullptr)));
 }
 
 void Game::init()
@@ -36,14 +36,18 @@ void Game::notify(NotifyFunc func)
     }
 }
 
+int Game::getRandomObjType()
+{
+    return rand() % C_OBJECTS_TYPES_COUNT + 1;
+}
+
 void Game::generateInitialBoard()
 {
-    srand(static_cast<unsigned>(time(nullptr)));
     for (int y = 0; y < m_board.height(); y++)
     {
         for (int x = 0; x < m_board.width(); x++)
         {
-            m_board(x,y) = rand() % C_OBJECTS_TYPES_COUNT + 1; // 0 value means no item on this position
+            m_board(x,y) = getRandomObjType(); // 0 value means no item on this position
         }
     }
     
@@ -84,7 +88,7 @@ void Game::replaceWithUnique(const ObjectsPositionSet &objectsIds)
     }
 }
 
-Game::ObjectsPositionSet Game::getObjectsToRemove(bool needCalcScore)
+ObjectsPositionSet Game::getObjectsToRemove(bool needCalcScore)
 {
     auto getMatchesByPosition = [this](int x, int y, bool horizontal,  ObjectsPositionSet &matches, std::map<int, int> *sequencesMap)
     {
@@ -225,7 +229,7 @@ bool Game::getPossibleMove(Game::ObjectsPositionList *moveContents)
 
 void Game::printObjects()
 {
-    for (int y = 0; y < m_board.height(); y++)
+    for (int y = -m_board.height(); y < m_board.height(); y++)
     {
         for (int x = 0; x < m_board.width(); x++)
         {
@@ -316,5 +320,49 @@ void Game::removeObjects(const ObjectsPositionSet &objects)
     {
         m_board(pos) = 0;
     }
-    notify([](Observer *o){o->onRemoveObjects();});
+    ObjectsMovesList dropsList;
+    for (int x = 0; x < m_board.width() - 1; x++)
+    {
+        // get blank objects count in every column
+        unsigned blankItemsCount = 0;
+        for (int y = 0; y < m_board.height() - 1; y++)
+        {
+            if (m_board(x,y) == 0)
+            {
+                blankItemsCount++;
+            }
+        }
+        
+        // generate virtual objects that'll be dropped
+        if (blankItemsCount)
+        {
+            for (unsigned i = -1; i >= -blankItemsCount; i--)
+            {
+                m_board(x, i) = getRandomObjType();
+            }
+        }
+        
+        // calc destination points for falling objects
+        int dropHeight = 0;
+        for (int y = m_board.height()-1; y >= -m_board.height() ; y--)
+        {
+            if (m_board(x,y) == 0)
+            {
+                dropHeight++;
+            }
+            else if (dropHeight)
+            {
+                dropsList.emplace_back(Point(x,y), Point(x,y+dropHeight));
+            }
+        }
+    }
+    
+    printObjects();
+    
+    notify([dropsList](Observer *o){o->onRemoveObjects(dropsList);});
+
+    for (auto pair : dropsList)
+    {
+        m_board(pair.second) = m_board(pair.first);
+    }
 }

@@ -36,7 +36,7 @@ public:
     void onInitBoard() override;
     void onSelectObject(const Point &pos) override;
     void onSwapObjects(const Point &firstPos, const Point &secondPos) override;
-    void onRemoveObjects() override;
+    void onRemoveObjects(const ObjectsMovesList &dropsLis) override;
     
     void init();
     void render();
@@ -44,6 +44,7 @@ public:
     void clean();
     bool isRunning() {return m_running;}
     bool pixelPosToBoardPos(const Point &pixelPos, Point &boardPos);
+    Point boardPosToPixelPos(const Point &boardPos);
 };
 
 #endif /* defined(__MidasMiner__GameView__) */

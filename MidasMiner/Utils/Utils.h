@@ -40,6 +40,8 @@ struct Point
     }
 };
 
+
+// Board class also contains virtual part of game board that uses to create new game objects after matches removing
 class Board
 {
 private:
