@@ -78,6 +78,8 @@ private:
     int m_width {};
     int m_height {};
     std::vector<std::vector<int> > m_objects;
+    
+    // to uniformity consider out of board points as points with 0 value
     int m_outOfBoardValue = 0;
 public:
     Board(int width, int height);
@@ -87,9 +89,16 @@ public:
     int  operator() (const Point &pos) const;
     int width() const;
     int height() const ;
+    
+    // return map of objects surrounding given point (max 4)
+    //  key - object type
+    //  value - point
     std::multimap<int, Point> getNeighbors(const Point &pos);
+    
+    // return true if point is inside actual board (not virtual)
     bool isInside(const Point &pos);
     
+    // return true is points have own side
     static bool areNeighbors(const Point &first, const Point &second);
 };
 

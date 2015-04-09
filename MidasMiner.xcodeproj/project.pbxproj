@@ -75,6 +75,7 @@
 		F04A356A1AD072CC00B6672C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		F04A35771AD07AF800B6672C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = Game.cpp; path = Model/Game.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		F04A35781AD07AF800B6672C /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Game.h; path = Model/Game.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		F09392A21AD730FF00A5EF1E /* SDLCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDLCommon.h; path = View/SDLCommon.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +172,7 @@
 			children = (
 				CED2CB561AD3F0F300D343F6 /* TextureManager.cpp */,
 				CED2CB571AD3F0F300D343F6 /* TextureManager.h */,
+				F09392A21AD730FF00A5EF1E /* SDLCommon.h */,
 				CED2CB661AD40EBD00D343F6 /* GameView.cpp */,
 				CED2CB671AD40EBD00D343F6 /* GameView.h */,
 				CED2CB711AD41D2500D343F6 /* GameObject.cpp */,

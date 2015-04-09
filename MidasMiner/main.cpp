@@ -12,5 +12,6 @@
 int main(int argc, const char * argv[])
 {
     GameController::getInstance()->init();
+    GameController::destroyInstance();
     return 0;
 }

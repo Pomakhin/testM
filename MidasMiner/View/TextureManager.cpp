@@ -25,11 +25,8 @@ bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* pR
         int width = 0;
         int height = 0;
         SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
-        TextureData data;
-        data.SDLTexture = texture;
-        data.Width = width;
-        data.Height = height;
-        m_textureMap[id] = data;
+
+        m_textureMap.emplace(id, TextureData(texture, width, height));
         return true;
     }
     // reaching here means something went wrong
@@ -47,16 +44,11 @@ void TextureManager::draw(std::string id, int x, int y, SDL_Renderer* pRenderer,
     srcRect.h = destRect.h = texData.Height;
     destRect.x = x;
     destRect.y = y;
-    SDL_SetTextureAlphaMod( texData.SDLTexture, alpha );
-    SDL_RenderCopyEx(pRenderer, texData.SDLTexture, &srcRect,
+    SDL_SetTextureAlphaMod( texData.SDLTexture.get(), alpha );
+    SDL_RenderCopyEx(pRenderer, texData.SDLTexture.get(), &srcRect,
                      &destRect, 0, 0, SDL_FLIP_NONE);
-    //SDL_SetTextureAlphaMod( texData.SDLTexture, 255 );
 }
 
 TextureManager::~TextureManager()
 {
-    for (auto pair : m_textureMap)
-    {
-        SDL_DestroyTexture(pair.second.SDLTexture);
-    }
 }

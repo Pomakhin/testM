@@ -33,6 +33,7 @@ private:
 protected:
     GameController(){};
 public:
+    ~GameController();
     void init();
 };
 

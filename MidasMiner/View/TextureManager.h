@@ -13,20 +13,22 @@
 #include <string>
 #include <map>
 #include "GenericSingleton.h"
+#include "SDLCommon.h"
 
 class SDL_Renderer;
 class SDL_Texture;
 
 struct TextureData
 {
-    SDL_Texture *SDLTexture = nullptr;
+    std::unique_ptr<SDL_Texture, SDLDeleter> SDLTexture;
     int Width = 0;
     int Height = 0;
     TextureData(SDL_Texture *sdlTexture, int width, int height):
-        SDLTexture(sdlTexture),
         Width(width),
         Height(height)
-    {}
+    {
+        SDLTexture.reset(sdlTexture);
+    }
     TextureData(){}
 };
 

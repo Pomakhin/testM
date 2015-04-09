@@ -52,16 +52,12 @@ void Game::generateInitialBoard()
         }
     }
     
-    //printObjects();
+    ObjectsPositionSet matchesSet = getObjectsToRemove(false);
     
-    ObjectsPositionSet l_matchesSet = getObjectsToRemove(false);
-    
-    if (l_matchesSet.size())
+    if (matchesSet.size())
     {
-        replaceWithUnique(l_matchesSet);
+        replaceWithUnique(matchesSet);
     }
-    
-    //printObjects();
     
     // even though probability is negligible
     if (!getPossibleMove(nullptr))
@@ -142,13 +138,15 @@ ObjectsPositionSet Game::getObjectsToRemove(bool needCalcScore)
         }
     }
     
-    // increase score
+    // Increase score
+    // 1. by sequences length
     int matchesCount = 0;
     for (auto pair : sequencesMap)
     {
         matchesCount += pair.second;
         m_score += C_SEQ_SCORE_MAP.at(pair.first) * pair.second;
     }
+    // 2. by matches count
     if (matchesCount > 1)
     {
         auto it = C_MATCHES_SCORE_MAP.find(matchesCount);
@@ -276,6 +274,7 @@ void Game::setSelected(const Point &point)
         {
             if (Board::areNeighbors(m_selected.second, point))
             {
+                // if already have one object selected and objects are neighbors - perform swap
                 doSwap(m_selected.second, point, SwapData::SwapState::Direct);
             }
             else
@@ -294,19 +293,6 @@ void Game::setSelected(const Point &point)
     if (needNotify)
     {
         notify([point](Observer *o){o->onSelectObject(point);});
-    }
-}
-
-bool Game::getSelected(Point &point)
-{
-    if (m_selected.first)
-    {
-        point = m_selected.second;
-        return true;
-    }
-    else
-    {
-        return false;
     }
 }
 

@@ -11,6 +11,12 @@
 #include "GameView.h"
 #include "Consts.h"
 
+GameController::~GameController()
+{
+    GameView::destroyInstance();
+    Game::destroyInstance();
+}
+
 void GameController::init()
 {
     m_running = GameView::getInstance()->init();
@@ -102,6 +108,7 @@ void GameController::selectObject(const Point &pos)
         if (GameView::getInstance()->pixelPosToBoardPos(pos, boardPos))
         {
             Game::getInstance()->setSelected(boardPos);
+            // reset hint timer after every user select
             initHint();
         }
     }

@@ -31,6 +31,7 @@ public:
     virtual void onRemoveObjects(const ObjectsMovesList &dropsLis){};
 };
 
+// Game model
 class Game : public Singleton<Game>
 {
     friend class Singleton<Game>;
@@ -67,16 +68,19 @@ private:
 protected:
     Game();
 public:
+    void registerObserver(Observer *observer);
+    void init();    
+    
     bool getPossibleMove(ObjectsPositionList *moveContents);
     void setSelected(const Point &point);
-    bool getSelected(Point &point);
-    void init();
     const Board &getBoard() {return m_board;}
+    
     bool getBlockControls() {return m_blockControls;}
+    
+    // Views notify Game directly
     void onEndSwapping();
     void onEndRemoving();
     
-    void registerObserver(Observer *observer);
     int getScore() {return m_score;}
     
     // for debug

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450224558.831836"
+            timestampString = "450308396.099904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "Game::getPossibleMove(Game::ObjectsPositionList *moveContents)"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "Game::getPossibleMove(ObjectsPositionList *moveContents)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450224558.831836"
+            timestampString = "450308396.099904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
-            landmarkName = "Game::getPossibleMove(Game::ObjectsPositionList *moveContents)"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "Game::getPossibleMove(ObjectsPositionList *moveContents)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450224558.831836"
+            timestampString = "450308396.099904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
-            landmarkName = "Game::getPossibleMove(Game::ObjectsPositionList *moveContents)"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "Game::getPossibleMove(ObjectsPositionList *moveContents)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450226551.731739"
+            timestampString = "450308396.099904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
-            landmarkName = "Game::removeObjects(const ObjectsPositionSet &amp;objects)"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
+            landmarkName = "Game::removeObjects()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,28 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450226551.731739"
+            timestampString = "450308396.099904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
-            landmarkName = "Game::removeObjects(const ObjectsPositionSet &amp;objects)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450224558.831836"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "Game::generateInitialBoard()"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
+            landmarkName = "Game::removeObjects()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -127,7 +111,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
             endingLineNumber = "64"
-            landmarkName = "GameObject::update()"
+            landmarkName = "GameObject::isIntersect(const Point &amp;point)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,12 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450224558.831836"
+            timestampString = "450308396.099904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
-            landmarkName = "Game::setSelected(const Point &amp;point)"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "Game::doSwap(const Point &amp;firstPos, const Point &amp;secondPos, const SwapData::SwapState &amp;state)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -159,7 +143,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "89"
             endingLineNumber = "89"
-            landmarkName = "GameObject::load(const Point &amp;pos, const std::string &amp;textureId)"
+            landmarkName = "GameObject::moveTo(const Point &amp;toPos, const float &amp;acceleration)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -170,43 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/View/GameView.cpp"
-            timestampString = "450216244.982919"
+            timestampString = "450311457.851258"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "GameView::update()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450224558.831836"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
-            landmarkName = "Game::doSwap(const Point &amp;firstPos, const Point &amp;secondPos, const SwapData::SwapState &amp;state)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MidasMiner/View/GameView.cpp"
-            timestampString = "450216086.122746"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "GameView::init()"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,12 +170,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450224558.831836"
+            timestampString = "450308396.099904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
-            landmarkName = "Game::onEndSwapping()"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
+            landmarkName = "Game::printObjects()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -234,12 +186,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/View/GameView.cpp"
-            timestampString = "450226130.772505"
+            timestampString = "450310156.232674"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "GameView::onRemoveObjects(const ObjectsMovesList &amp;dropsLis)"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "GameView::init()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MidasMiner/View/GameView.cpp"
+            timestampString = "450311457.851258"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "GameView::clearSelection()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MidasMiner/main.cpp"
+            timestampString = "450309778.868165"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "main(int argc, const char * argv[])"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MidasMiner/Controller/GameController.cpp"
+            timestampString = "450311492.740353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "GameController::newGame()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

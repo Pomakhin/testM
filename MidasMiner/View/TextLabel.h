@@ -12,9 +12,7 @@
 #include <stdio.h>
 #include "Utils.h"
 #include <string>
-
-class SDL_Renderer;
-class SDL_Texture;
+#include "SDLCommon.h"
 
 class TextLabel
 {
@@ -23,7 +21,7 @@ private:
     std::string m_font;
     Point m_pos;
     int m_size = 0;
-    SDL_Texture *m_texture = nullptr;
+    std::unique_ptr<SDL_Texture, SDLDeleter> m_texture;
 public:
     TextLabel(SDL_Renderer* renderer, const std::string &font, const Point &pos, int size);
     ~TextLabel();

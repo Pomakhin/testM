@@ -23,7 +23,7 @@ void TextLabel::draw()
     {
         int width = 0;
         int height = 0;
-        SDL_QueryTexture(m_texture, nullptr, nullptr, &width, &height);
+        SDL_QueryTexture(m_texture.get(), nullptr, nullptr, &width, &height);
         SDL_Rect srcRect;
         SDL_Rect destRect;
         srcRect.x = 0;
@@ -32,14 +32,14 @@ void TextLabel::draw()
         srcRect.h = destRect.h = height;
         destRect.x = m_pos.x;
         destRect.y = m_pos.y;
-        SDL_RenderCopyEx(m_renderer, m_texture, &srcRect, &destRect, 0, 0, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(m_renderer, m_texture.get(), &srcRect, &destRect, 0, 0, SDL_FLIP_NONE);
     }
 }
 void TextLabel::setText(const std::string &text)
 {
     if (m_texture)
     {
-        SDL_DestroyTexture(m_texture);
+        SDL_DestroyTexture(m_texture.get());
         m_texture = nullptr;
     }
     if (text.size())
@@ -49,8 +49,8 @@ void TextLabel::setText(const std::string &text)
         if (font)
         {
             SDL_Surface *surf = TTF_RenderText_Blended(font, text.c_str(), {0,0,0});
-            m_texture = SDL_CreateTextureFromSurface(m_renderer, surf);
-            if (m_texture == nullptr)
+            m_texture.reset(SDL_CreateTextureFromSurface(m_renderer, surf));
+            if (!m_texture)
             {
                 std::cout << "SDL renderText error\n";
             }
@@ -65,8 +65,4 @@ void TextLabel::setText(const std::string &text)
 }
 TextLabel::~TextLabel()
 {
-    if (m_texture)
-    {
-        SDL_DestroyTexture(m_texture);
-    }
 }
