@@ -204,6 +204,7 @@ void GameView::onSelectObject(const Point &pos)
 void GameView::onSwapObjects(const Point &firstPos, const Point &secondPos)
 {
     clearSelection();
+    removeHint();
     auto firstIt = m_objects.find(firstPos);
     auto secondIt = m_objects.find(secondPos);
     assert(firstIt != m_objects.end());
@@ -296,8 +297,34 @@ void GameView::updateGameTime(int t)
 
 void GameView::gameOver()
 {
+    removeHint();
     m_timeLabel->setText("");
     m_gameOverLabel->setText("GAME OVER");
+}
+
+void GameView::setHint()
+{
+    removeHint();
+    Game::getInstance()->getPossibleMove(&m_hintList);
+    for (auto pos : m_hintList)
+    {
+        auto it = m_objects.find(pos);
+        if (it != m_objects.end())
+        {
+            it->second.reset(new HintDecorator(std::move(it->second)));
+        }
+    }
+}
+
+void GameView::removeHint()
+{
+    for (auto pos : m_hintList)
+    {
+        m_objects[pos].reset(new GameObject());
+        const Board &board = Game::getInstance()->getBoard();
+        m_objects[pos]->load(boardPosToPixelPos(pos), C_TYPES_MAP.at(board(pos)));
+    }
+    m_hintList.clear();
 }
 
 

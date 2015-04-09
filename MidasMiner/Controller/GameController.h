@@ -19,14 +19,17 @@ class GameController : public Singleton<GameController>
     friend class Singleton<GameController>;
 private:
     Timer m_timer;
+    Timer m_hintTimer;
     
     bool m_running = false;
     Uint32 m_frameStart = 0;
     Uint32 m_frameTime = 0;
-    Uint32 m_beginOfGame = 0;
     
     void handleEvents();
     void newGame();
+    
+    void selectObject(const Point &pos);
+    void initHint();
 protected:
     GameController(){};
 public:

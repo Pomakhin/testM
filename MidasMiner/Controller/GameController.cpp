@@ -14,8 +14,6 @@
 void GameController::init()
 {
     m_running = GameView::getInstance()->init();
-    
-    m_beginOfGame = SDL_GetTicks();
     newGame();
     while (m_running)
     {
@@ -25,6 +23,10 @@ void GameController::init()
 
         GameView::getInstance()->update();
         m_timer.update();
+        if (m_timer.isActive())
+        {
+            m_hintTimer.update();
+        }
         GameView::getInstance()->render();
         
         m_frameTime = SDL_GetTicks() - m_frameStart;
@@ -42,7 +44,14 @@ void GameController::newGame()
     m_timer.init(static_cast<double>(SDL_GetTicks()) / 1000.0f + C_GAME_TIME);
     m_timer.setOnTimerFunction([](int t){GameView::getInstance()->updateGameTime(t);});
     m_timer.setOnCompleteTimerFunction([]{GameView::getInstance()->gameOver();});
-    Game::getInstance()->init();    
+    Game::getInstance()->init();
+    initHint();
+}
+
+void GameController::initHint()
+{
+    m_hintTimer.init(static_cast<double>(SDL_GetTicks()) / 1000.0f + C_HINT_TIME);
+    m_hintTimer.setOnCompleteTimerFunction([]{GameView::getInstance()->setHint();});
 }
 
 void GameController::handleEvents()
@@ -57,31 +66,17 @@ void GameController::handleEvents()
                 break;
             case SDL_MOUSEBUTTONDOWN:
             {
-                if (!Game::getInstance()->getBlockControls() && m_timer.isActive())
+                if (event.button.button == SDL_BUTTON_LEFT)
                 {
-                    if (event.button.button == SDL_BUTTON_LEFT)
-                    {
-                        Point boardPos;
-                        if (GameView::getInstance()->pixelPosToBoardPos(Point(event.button.x, event.button.y), boardPos))
-                        {
-                            Game::getInstance()->setSelected(boardPos);
-                        }
-                    }
+                    selectObject(Point(event.button.x, event.button.y));
                 }
             }
                 break;
             case SDL_MOUSEBUTTONUP:
             {
-                if (!Game::getInstance()->getBlockControls() && m_timer.isActive())
+                if (event.button.button == SDL_BUTTON_LEFT)
                 {
-                    if (event.button.button == SDL_BUTTON_LEFT)
-                    {
-                        Point boardPos;
-                        if (GameView::getInstance()->pixelPosToBoardPos(Point(event.button.x, event.button.y), boardPos))
-                        {
-                            Game::getInstance()->setSelected(boardPos);
-                        }
-                    }
+                    selectObject(Point(event.button.x, event.button.y));
                 }
             }
                 break;
@@ -95,6 +90,19 @@ void GameController::handleEvents()
                 break;
             default:
                 break;
+        }
+    }
+}
+
+void GameController::selectObject(const Point &pos)
+{
+    if (!Game::getInstance()->getBlockControls() && m_timer.isActive())
+    {
+        Point boardPos;
+        if (GameView::getInstance()->pixelPosToBoardPos(pos, boardPos))
+        {
+            Game::getInstance()->setSelected(boardPos);
+            initHint();
         }
     }
 }

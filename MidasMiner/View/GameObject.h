@@ -24,6 +24,8 @@ public:
     virtual bool isIntersect(const Point &point) = 0;
     virtual void moveTo(const Point &toPos, const float &acceleration = 0.0f) = 0;
     virtual Point getPos() = 0;
+    virtual void setAlpha(int value) = 0;
+    virtual int getAlpha() = 0;
 };
 
 class GameObject : public BaseGameObject
@@ -35,9 +37,7 @@ protected:
     float m_xVelocity = 0.0f;
     float m_yVelocity = 0.0f;
     float m_acceleration = 0.0f;
-    
     int m_alpha = 255;
-    bool m_alphaIncrease = false;
 public:
     virtual void draw(SDL_Renderer* renderer) override;
     virtual bool update() override;
@@ -45,6 +45,8 @@ public:
     virtual bool isIntersect(const Point &point) override;
     virtual void moveTo(const Point &toPos, const float &acceleration) override;
     virtual Point getPos() override {return m_pos;}
+    virtual void setAlpha(int value) override {m_alpha = value;}
+    virtual int getAlpha() override {return m_alpha;}
 };
 
 class GameObjectDecorator : public BaseGameObject
@@ -60,6 +62,8 @@ public:
     virtual bool isIntersect(const Point &point) override;
     virtual void moveTo(const Point &toPos, const float &acceleration) override;
     virtual Point getPos() override;
+    virtual void setAlpha(int value) override;
+    virtual int getAlpha() override;
 };
 
 class SelectedDecorator : public GameObjectDecorator
@@ -68,6 +72,16 @@ public:
     SelectedDecorator(std::unique_ptr<BaseGameObject> obj):
         GameObjectDecorator(std::move(obj)) {}
     void draw(SDL_Renderer *renderer) override;
+};
+
+class HintDecorator : public GameObjectDecorator
+{
+private:    
+    bool m_alphaIncrease = false;
+public:
+    HintDecorator(std::unique_ptr<BaseGameObject> obj):
+        GameObjectDecorator(std::move(obj)) {}
+    bool update() override;    
 };
 
 

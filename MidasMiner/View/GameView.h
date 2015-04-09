@@ -32,7 +32,9 @@ private:
     std::unique_ptr<TextLabel> m_timeLabel;
     std::unique_ptr<TextLabel> m_gameOverLabel;
     std::unique_ptr<TextLabel> m_replayLabel;
-    std::unique_ptr<TextLabel> m_scoreLabel;;
+    std::unique_ptr<TextLabel> m_scoreLabel;
+    
+    ObjectsPositionList m_hintList;
     
     void clearSelection();
 protected:
@@ -52,6 +54,8 @@ public:
     
     void updateGameTime(int t);
     void gameOver();
+    void setHint();
+    void removeHint();
 };
 
 #endif /* defined(__MidasMiner__GameView__) */

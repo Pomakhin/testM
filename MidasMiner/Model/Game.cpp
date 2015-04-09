@@ -162,11 +162,11 @@ ObjectsPositionSet Game::getObjectsToRemove(bool needCalcScore)
     return result;
 }
 
-bool Game::getPossibleMove(Game::ObjectsPositionList *moveContents)
+bool Game::getPossibleMove(ObjectsPositionList *moveContents)
 {
-    auto getMoveByTwoPoints = [this](const Point &firstPos, const Point &secondPos, Game::ObjectsPositionList *moveContents)->bool
+    auto getMoveByTwoPoints = [this](const Point &firstPos, const Point &secondPos, ObjectsPositionList *moveContents)->bool
     {
-        auto getMoveByThreePoints = [this](const Point &firstPos, const Point &secondPos, const Point &candidatePos, Game::ObjectsPositionList *moveContents)->bool
+        auto getMoveByThreePoints = [this](const Point &firstPos, const Point &secondPos, const Point &candidatePos, ObjectsPositionList *moveContents)->bool
         {
             bool result = false;
             if (m_board.isInside(candidatePos))

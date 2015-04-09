@@ -20,6 +20,7 @@
 
 typedef std::set<Point > ObjectsPositionSet;
 typedef std::list<std::pair<Point, Point > > ObjectsMovesList;
+typedef std::list<Point > ObjectsPositionList;
 
 class Observer
 {
@@ -34,7 +35,6 @@ class Game : public Singleton<Game>
 {
     friend class Singleton<Game>;
 private:
-    typedef std::list<Point > ObjectsPositionList;
     typedef std::function<void(Observer*)> NotifyFunc;
     struct SwapData
     {
@@ -60,7 +60,6 @@ private:
     int getRandomObjType();
     void generateInitialBoard();
     ObjectsPositionSet getObjectsToRemove(bool needCalcScore);
-    bool getPossibleMove(ObjectsPositionList *moveContents);
     void replaceWithUnique(const ObjectsPositionSet &objectsIds);
     void notify(NotifyFunc func);
     void doSwap(const Point &firstPos, const Point &secondPos, const SwapData::SwapState &state);
@@ -68,6 +67,7 @@ private:
 protected:
     Game();
 public:
+    bool getPossibleMove(ObjectsPositionList *moveContents);
     void setSelected(const Point &point);
     bool getSelected(Point &point);
     void init();

@@ -17,6 +17,7 @@ static const int C_FPS = 60;
 static const int C_DELAY_TIME = 1000.0f / C_FPS;
 
 static const double C_GAME_TIME = 60.0f;
+static const double C_HINT_TIME = 5.0f;
 static const int C_BOARD_WIDTH = 8;
 static const int C_BOARD_HEIGHT = 8;
 static const int C_MIN_MATCH_COUNT = 3;

@@ -19,32 +19,6 @@ void GameObject::draw(SDL_Renderer* renderer)
 
 bool GameObject::update()
 {
-//    if (m_alphaIncrease)
-//    {
-//        if (m_alpha < 255)
-//        {
-//            m_alpha+= 5;
-//        }
-//        else
-//        {
-//            m_alphaIncrease = false;
-//        }
-//    }
-//    else
-//    {
-//        if (m_alpha > 100)
-//        {
-//            m_alpha-= 5;
-//        }
-//        else
-//        {
-//            m_alphaIncrease = true;
-//        }
-//    }
-    
-//    m_y+=m_yVelocity;
-//    m_yVelocity += C_GRAVITATIONAL_ACCELERATION;
-
     bool result = false;
     if (m_xVelocity)
     {
@@ -147,6 +121,14 @@ Point GameObjectDecorator::getPos()
 {
     return m_gameObject->getPos();
 }
+void GameObjectDecorator::setAlpha(int value)
+{
+    m_gameObject->setAlpha(value);
+}
+int GameObjectDecorator::getAlpha()
+{
+    return m_gameObject->getAlpha();
+}
 void SelectedDecorator::draw(SDL_Renderer *renderer)
 {
     GameObjectDecorator::draw(renderer);
@@ -155,4 +137,32 @@ void SelectedDecorator::draw(SDL_Renderer *renderer)
     //Set Color of Rect with SDL_SetRenderDrawColor if needed
 
     SDL_RenderDrawRect(renderer, &rectToDraw);
+}
+
+bool HintDecorator::update()
+{
+    if (m_alphaIncrease)
+    {
+        if (getAlpha() < 255)
+        {
+            setAlpha(getAlpha() + 5);
+        }
+        else
+        {
+            m_alphaIncrease = false;
+        }
+    }
+    else
+    {
+        if (getAlpha() > 100)
+        {
+            setAlpha(getAlpha() - 5);
+        }
+        else
+        {
+            m_alphaIncrease = true;
+        }
+    }
+    
+    return GameObjectDecorator::update();
 }
