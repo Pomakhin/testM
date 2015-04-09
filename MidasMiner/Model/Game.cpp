@@ -51,7 +51,7 @@ void Game::generateInitialBoard()
         }
     }
     
-    printObjects();
+    //printObjects();
     
     ObjectsPositionSet l_matchesSet = getObjectsToRemove(true);
     
@@ -60,7 +60,7 @@ void Game::generateInitialBoard()
         replaceWithUnique(l_matchesSet);
     }
     
-    printObjects();
+    //printObjects();
     
     // even though probability is negligible
     if (!getPossibleMove(nullptr))
@@ -302,67 +302,105 @@ void Game::onEndSwapping()
     m_blockControls = false;
     if (m_swap.State == SwapData::SwapState::Direct)
     {
-        ObjectsPositionSet objectsToRemove = getObjectsToRemove(true);
-        if (objectsToRemove.size())
-        {
-            removeObjects(objectsToRemove);
-        }
-        else
+        if (!removeObjects())
         {
             doSwap(m_swap.FirstPos, m_swap.SecondPos, SwapData::SwapState::Reverse);
         }
     }
 }
 
-void Game::removeObjects(const ObjectsPositionSet &objects)
+// Calculate drop vectors and send them to Observers
+// WARNING! dropList is order dependent: the bottom objects must be first
+bool Game::removeObjects()
 {
-    for (const Point &pos : objects)
+    ObjectsPositionSet objectsToRemove = getObjectsToRemove(true);
+    if (objectsToRemove.size())
     {
-        m_board(pos) = 0;
-    }
-    ObjectsMovesList dropsList;
-    for (int x = 0; x < m_board.width() - 1; x++)
-    {
-        // get blank objects count in every column
-        unsigned blankItemsCount = 0;
-        for (int y = 0; y < m_board.height() - 1; y++)
+        printObjects();
+        
+        
+        m_blockControls = true;
+        for (const Point &pos : objectsToRemove)
         {
-            if (m_board(x,y) == 0)
+            m_board(pos) = 0;
+        }
+        
+        printObjects();
+        ObjectsMovesList dropsList;
+        for (int x = 0; x < m_board.width(); x++)
+        {
+            // get blank objects count in every column
+            unsigned blankItemsCount = 0;
+            for (int y = 0; y < m_board.height(); y++)
             {
-                blankItemsCount++;
+                if (m_board(x,y) == 0)
+                {
+                    blankItemsCount++;
+                }
+            }
+            
+            // generate virtual objects that'll be dropped
+            if (blankItemsCount)
+            {
+                for (unsigned i = -1; i >= -blankItemsCount; i--)
+                {
+                    m_board(x, i) = getRandomObjType();
+                }
+                
+                // calc destination points for falling objects
+                int dropHeight = 0;
+                for (int y = m_board.height()-1; y >= -m_board.height() ; y--)
+                {
+                    if (m_board(x,y) == 0)
+                    {
+                        dropHeight++;
+                    }
+                    else if (dropHeight)
+                    {
+                        dropsList.emplace_back(Point(x,y), Point(x,y+dropHeight));
+                    }
+                }
             }
         }
         
-        // generate virtual objects that'll be dropped
-        if (blankItemsCount)
-        {
-            for (unsigned i = -1; i >= -blankItemsCount; i--)
-            {
-                m_board(x, i) = getRandomObjType();
-            }
-        }
+        printObjects();
         
-        // calc destination points for falling objects
-        int dropHeight = 0;
-        for (int y = m_board.height()-1; y >= -m_board.height() ; y--)
-        {
-            if (m_board(x,y) == 0)
-            {
-                dropHeight++;
-            }
-            else if (dropHeight)
-            {
-                dropsList.emplace_back(Point(x,y), Point(x,y+dropHeight));
-            }
-        }
-    }
-    
-    printObjects();
-    
-    notify([dropsList](Observer *o){o->onRemoveObjects(dropsList);});
+        notify([dropsList](Observer *o){o->onRemoveObjects(dropsList);});
 
-    for (auto pair : dropsList)
-    {
-        m_board(pair.second) = m_board(pair.first);
+        for (auto pair : dropsList)
+        {
+            m_board(pair.second) = m_board(pair.first);
+            m_board(pair.first) = 0;
+        }
+        
+        printObjects();
+        
+        // for debug!!!
+        for (int x = 0; x < m_board.width() - 1; x++)
+        {
+            for (int y = 0; y < m_board.height() - 1; y++)
+            {
+                if (m_board(x,y) == 0)
+                {
+                    int i;
+                    i = 0;
+                }
+                assert(m_board(x,y) != 0);
+            }
+        }
+        
+        return true;
+            
     }
+    else
+    {
+        return false;
+    }
+}
+
+void Game::onEndRemoving()
+{
+    m_blockControls = false;
+    
+    removeObjects();
 }

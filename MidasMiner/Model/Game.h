@@ -63,7 +63,7 @@ private:
     void replaceWithUnique(const ObjectsPositionSet &objectsIds);
     void notify(NotifyFunc func);
     void doSwap(const Point &firstPos, const Point &secondPos, const SwapData::SwapState &state);
-    void removeObjects(const ObjectsPositionSet &objects);
+    bool removeObjects();
 protected:
     Game();
 public:
@@ -73,6 +73,7 @@ public:
     const Board &getBoard() {return m_board;}
     bool getBlockControls() {return m_blockControls;}
     void onEndSwapping();
+    void onEndRemoving();
     
     void registerObserver(Observer *observer);
     

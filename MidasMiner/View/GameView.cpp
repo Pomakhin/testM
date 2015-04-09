@@ -7,7 +7,6 @@
 //
 
 #include "GameView.h"
-#include <SDL2/SDL.h>
 #include <iostream>
 #include "TextureManager.h"
 #include "GameObject.h"
@@ -38,12 +37,10 @@ void GameView::init()
                                        255,255,255,255);
             }
             
-            SDL_Rect rect;
-            rect.x = C_BOARD_TOP_LEFT.x - 2;
-            rect.y = C_BOARD_TOP_LEFT.y - 2;
-            rect.w = 320;
-            rect.h = 320;
-            SDL_RenderSetClipRect(m_pRenderer, &rect);
+            m_clipRect.x = C_BOARD_TOP_LEFT.x - 2;
+            m_clipRect.y = C_BOARD_TOP_LEFT.y - 2;
+            m_clipRect.w = 320;
+            m_clipRect.h = 320;
             
             m_running = true;
         }
@@ -62,10 +59,16 @@ void GameView::render()
 {
     SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
     TextureManager::getInstance()->draw("BG", 0, 0, m_pRenderer);
+    
+    SDL_RenderSetClipRect(m_pRenderer, &m_clipRect);
+    
     for (const auto &pair : m_objects)
     {
         pair.second->draw(m_pRenderer);
     }
+    
+    SDL_RenderSetClipRect(m_pRenderer, nullptr);
+    
     SDL_RenderPresent(m_pRenderer); // draw to the screen
 }
 
@@ -84,6 +87,11 @@ void GameView::update()
     {
         m_swapInProgress = false;
         Game::getInstance()->onEndSwapping();
+    }
+    else if (m_removeInProgress && !hasMotion)
+    {
+        m_removeInProgress = false;
+        Game::getInstance()->onEndRemoving();
     }
 }
 
@@ -177,18 +185,24 @@ void GameView::onRemoveObjects(const ObjectsMovesList &dropsLis)
     // drop objects
     for (const auto &pair : dropsLis)
     {
-        // TODO:: bug here, need to update position!
         auto it = m_objects.find(pair.first);
         if (it == m_objects.end())
         {
-            m_objects[pair.first].reset(new GameObject());
-            m_objects[pair.first]->load(boardPosToPixelPos(pair.first), C_TYPES_MAP.at(board(pair.first)));
-            m_objects[pair.first]->moveTo(boardPosToPixelPos(pair.second));
+            m_objects[pair.second].reset(new GameObject());
+            m_objects[pair.second]->load(boardPosToPixelPos(pair.first), C_TYPES_MAP.at(board(pair.first)));
+            m_objects[pair.second]->moveTo(boardPosToPixelPos(pair.second));
+            
         }
         else
         {
             it->second->moveTo(boardPosToPixelPos(pair.second));
+            m_objects[pair.second] = std::move(it->second);
         }
+    }
+    
+    if (dropsLis.size())
+    {
+        m_removeInProgress = true;
     }
 }
 

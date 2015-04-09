@@ -13,9 +13,8 @@
 #include "GenericSingleton.h"
 #include <list>
 #include "Game.h"
+#include <SDL2/SDL.h>
 
-class SDL_Window;
-class SDL_Renderer;
 class BaseGameObject;
 
 class GameView : public Singleton<GameView>, Observer
@@ -24,8 +23,10 @@ class GameView : public Singleton<GameView>, Observer
 private:
     bool m_running = false;
     bool m_swapInProgress = false;
+    bool m_removeInProgress = false;
     SDL_Window* m_pWindow = 0;
     SDL_Renderer* m_pRenderer = 0;
+    SDL_Rect m_clipRect;
     std::map<Point, std::unique_ptr<BaseGameObject> > m_objects;
     std::pair<bool, Point> m_selected;
     
