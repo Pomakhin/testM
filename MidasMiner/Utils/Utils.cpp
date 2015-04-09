@@ -8,6 +8,73 @@
 
 #include "Utils.h"
 #include <cstdlib>
+#include <SDL2/SDL_timer.h>
+
+
+Timer::Timer():
+m_timeToStop(0.0f),
+m_currentRest(0)
+{}
+
+void Timer::init(double a_timeToStop)
+{
+    m_timeToStop = a_timeToStop;
+    m_currentRest = a_timeToStop - static_cast<double>(SDL_GetTicks()) / 1000.0f;
+}
+
+void Timer::stop()
+{
+    m_currentRest = 0;
+    m_timeToStop = 0.0f;
+}
+
+void Timer::setOnTimerFunction(OnTimerFunction a_onTimer)
+{
+    m_onTimer = a_onTimer;
+}
+
+void Timer::setOnCompleteTimerFunction(OnCompleteTimerFunction a_onComplete)
+{
+    m_onCompleteTimerFunction = a_onComplete;
+}
+
+void Timer::update()
+{
+    if (m_timeToStop > 0.0f)
+    {
+        double l_newRestTime = m_timeToStop - static_cast<double>(SDL_GetTicks()) / 1000.0f;
+        if (l_newRestTime > 0)
+        {
+            if ((int)l_newRestTime + 1 < m_currentRest)
+            {
+                m_currentRest = (int)l_newRestTime + 1;
+                if (m_onTimer)
+                {
+                    m_onTimer(m_currentRest);
+                }
+            }
+        }
+        else
+        {
+            m_currentRest = 0;
+            m_timeToStop = 0.0f;
+        }
+        if (m_currentRest == 0)
+        {
+            if (m_onCompleteTimerFunction)
+            {
+                m_onCompleteTimerFunction();
+                m_onCompleteTimerFunction = nullptr;
+            }
+        }
+    }
+}
+
+bool Timer::isActive()
+{
+    return m_timeToStop > 0.0f;
+}
+
 
 Board::Board(int width, int height):
 m_width(width),

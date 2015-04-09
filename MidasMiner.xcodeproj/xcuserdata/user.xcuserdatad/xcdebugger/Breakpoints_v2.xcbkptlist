@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450271741.63149"
+            timestampString = "450290559.950516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "404"
-            endingLineNumber = "404"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "Game::onEndRemoving()"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/View/GameView.cpp"
-            timestampString = "450271741.63149"
+            timestampString = "450290175.967994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "GameView::onRemoveObjects(const ObjectsMovesList &amp;dropsLis)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/View/GameView.cpp"
-            timestampString = "450266021.127165"
+            timestampString = "450290175.967994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "GameView::onRemoveObjects(const ObjectsMovesList &amp;dropsLis)"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/View/GameObject.cpp"
-            timestampString = "450266333.988652"
+            timestampString = "450277794.246233"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "GameObject::update()"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450271741.63149"
+            timestampString = "450290559.950516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "366"
-            endingLineNumber = "366"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
             landmarkName = "Game::removeObjects()"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450271741.63149"
+            timestampString = "450290559.950516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
             landmarkName = "Game::removeObjects()"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450271741.63149"
+            timestampString = "450290559.950516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "Game::removeObjects()"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,7 +122,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450271741.63149"
+            timestampString = "450290559.950516"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
+            landmarkName = "Game::removeObjects()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MidasMiner/Model/Game.cpp"
+            timestampString = "450290559.950516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "343"
@@ -137,13 +153,45 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MidasMiner/Model/Game.cpp"
-            timestampString = "450271741.63149"
+            filePath = "MidasMiner/View/GameView.cpp"
+            timestampString = "450290175.967994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
-            landmarkName = "Game::removeObjects()"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "GameView::updateGameTime(int t)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MidasMiner/Controller/GameController.cpp"
+            timestampString = "450288456.56898"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "GameController::newGame()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MidasMiner/View/GameView.cpp"
+            timestampString = "450290175.967994"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "GameView::gameOver()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

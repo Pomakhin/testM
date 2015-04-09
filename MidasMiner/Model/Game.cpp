@@ -20,6 +20,7 @@ Game::Game():
 
 void Game::init()
 {
+    m_score = 0;
     generateInitialBoard();    
 }
 
@@ -53,7 +54,7 @@ void Game::generateInitialBoard()
     
     //printObjects();
     
-    ObjectsPositionSet l_matchesSet = getObjectsToRemove(true);
+    ObjectsPositionSet l_matchesSet = getObjectsToRemove(false);
     
     if (l_matchesSet.size())
     {
@@ -139,6 +140,19 @@ ObjectsPositionSet Game::getObjectsToRemove(bool needCalcScore)
                 getMatchesByPosition(x, y, false, verticalObjects, needCalcScore ? &sequencesMap : nullptr);
             }
         }
+    }
+    
+    // increase score
+    int matchesCount = 0;
+    for (auto pair : sequencesMap)
+    {
+        matchesCount += pair.second;
+        m_score += C_SEQ_SCORE_MAP.at(pair.first) * pair.second;
+    }
+    if (matchesCount > 1)
+    {
+        auto it = C_MATCHES_SCORE_MAP.find(matchesCount);
+        m_score += (it == C_MATCHES_SCORE_MAP.end() ? C_MATCHES_SCORE_MAP.rbegin()->second : it->second);
     }
     
     ObjectsPositionSet &result = horizontalObjects;

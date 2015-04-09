@@ -12,17 +12,19 @@
 #include "GameObject.h"
 #include "Consts.h"
 #include <cassert>
+#include <SDL2_ttf/SDL_ttf.h>
 
 GameView::GameView()
 {
 }
 
-void GameView::init()
+bool GameView::init()
 {
-    Game::getInstance()->registerObserver(this);
+    bool result = true;
     // initialize SDL
-    if(SDL_Init(SDL_INIT_EVERYTHING) >= 0)
+    if (SDL_Init(SDL_INIT_EVERYTHING) >= 0)
     {
+        Game::getInstance()->registerObserver(this);
         // if succeeded create our window
         m_pWindow = SDL_CreateWindow("MidasMiner Clone", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 755, 600, 0);
         // if the window creation succeeded create our renderer
@@ -36,23 +38,48 @@ void GameView::init()
                 SDL_SetRenderDrawColor(m_pRenderer,
                                        255,255,255,255);
             }
+            else
+            {
+                result = false;
+            }
             
-            m_clipRect.x = C_BOARD_TOP_LEFT.x - 2;
-            m_clipRect.y = C_BOARD_TOP_LEFT.y - 2;
-            m_clipRect.w = 320;
-            m_clipRect.h = 320;
-            
-            m_running = true;
+            if (result)
+            {
+                m_clipRect.x = C_BOARD_TOP_LEFT.x - 2;
+                m_clipRect.y = C_BOARD_TOP_LEFT.y - 2;
+                m_clipRect.w = 320;
+                m_clipRect.h = 320;
+                
+                TextureManager::getInstance()->load("BackGround.jpg", "BG", m_pRenderer);
+                TextureManager::getInstance()->load("Blue.png", "Blue", m_pRenderer);
+                TextureManager::getInstance()->load("Green.png", "Green", m_pRenderer);
+                TextureManager::getInstance()->load("Purple.png", "Purple", m_pRenderer);
+                TextureManager::getInstance()->load("Red.png", "Red", m_pRenderer);
+                TextureManager::getInstance()->load("Yellow.png", "Yellow", m_pRenderer);
+
+                if (TTF_Init() != 0)
+                {
+                    std::cout << "Cannot init TTF\n";
+                    result = false;
+                }
+                else
+                {
+                    m_timeLabel.reset(new TextLabel(m_pRenderer, "Arial.ttf", Point(120, 215), 30));
+                    m_gameOverLabel.reset(new TextLabel(m_pRenderer, "Arial.ttf", Point(50, 215), 30));
+                    m_replayLabel.reset(new TextLabel(m_pRenderer, "Arial.ttf", Point(10, 10), 25));
+                    m_scoreLabel.reset(new TextLabel(m_pRenderer, "Arial.ttf", Point(420, 10), 25));
+                    
+                    m_replayLabel->setText("Press R to replay");
+                    m_scoreLabel->setText("Score: 0");
+                }
+            }
         }
     }
-    
-    TextureManager::getInstance()->load("BackGround.jpg", "BG", m_pRenderer);
-    TextureManager::getInstance()->load("Blue.png", "Blue", m_pRenderer);
-    TextureManager::getInstance()->load("Green.png", "Green", m_pRenderer);
-    TextureManager::getInstance()->load("Purple.png", "Purple", m_pRenderer);
-    TextureManager::getInstance()->load("Red.png", "Red", m_pRenderer);
-    TextureManager::getInstance()->load("Yellow.png", "Yellow", m_pRenderer);
-    
+    else
+    {
+        result = false;
+    }
+    return result;
 }
 
 void GameView::render()
@@ -60,14 +87,30 @@ void GameView::render()
     SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
     TextureManager::getInstance()->draw("BG", 0, 0, m_pRenderer);
     
+    // render game objects in a clip rect to implement falling objects
     SDL_RenderSetClipRect(m_pRenderer, &m_clipRect);
-    
     for (const auto &pair : m_objects)
     {
         pair.second->draw(m_pRenderer);
     }
-    
     SDL_RenderSetClipRect(m_pRenderer, nullptr);
+    
+    if (m_timeLabel)
+    {
+        m_timeLabel->draw();
+    }
+    if (m_gameOverLabel)
+    {
+        m_gameOverLabel->draw();
+    }
+    if (m_replayLabel)
+    {
+        m_replayLabel->draw();
+    }
+    if (m_scoreLabel)
+    {
+        m_scoreLabel->draw();
+    }
     
     SDL_RenderPresent(m_pRenderer); // draw to the screen
 }
@@ -105,6 +148,14 @@ void GameView::clean()
 
 void GameView::onInitBoard()
 {
+    if (m_gameOverLabel)
+    {
+        m_gameOverLabel->setText("");
+    }
+    if (m_scoreLabel)
+    {
+        m_scoreLabel->setText("Score: 0");
+    }
     m_objects.clear();
     const Board &board = Game::getInstance()->getBoard();
     
@@ -188,14 +239,15 @@ void GameView::onRemoveObjects(const ObjectsMovesList &dropsLis)
         auto it = m_objects.find(pair.first);
         if (it == m_objects.end())
         {
+            // drop objects from virtual board
             m_objects[pair.second].reset(new GameObject());
             m_objects[pair.second]->load(boardPosToPixelPos(pair.first), C_TYPES_MAP.at(board(pair.first)));
-            m_objects[pair.second]->moveTo(boardPosToPixelPos(pair.second));
-            
+            m_objects[pair.second]->moveTo(boardPosToPixelPos(pair.second), C_GRAVITATIONAL_ACCELERATION);
         }
         else
         {
-            it->second->moveTo(boardPosToPixelPos(pair.second));
+            // drop objects from real board
+            it->second->moveTo(boardPosToPixelPos(pair.second), C_GRAVITATIONAL_ACCELERATION);
             m_objects[pair.second] = std::move(it->second);
         }
     }
@@ -203,6 +255,11 @@ void GameView::onRemoveObjects(const ObjectsMovesList &dropsLis)
     if (dropsLis.size())
     {
         m_removeInProgress = true;
+    }
+    
+    if (m_scoreLabel)
+    {
+        m_scoreLabel->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
     }
 }
 
@@ -227,6 +284,20 @@ bool GameView::pixelPosToBoardPos(const Point &pixelPos, Point &boardPos)
         }
     }
     return result;
+}
+
+void GameView::updateGameTime(int t)
+{
+    if (m_timeLabel)
+    {
+        m_timeLabel->setText(std::to_string(t));
+    }
+}
+
+void GameView::gameOver()
+{
+    m_timeLabel->setText("");
+    m_gameOverLabel->setText("GAME OVER");
 }
 
 

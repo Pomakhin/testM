@@ -53,6 +53,7 @@ private:
     Board m_board;
     std::pair<bool, Point> m_selected;
     bool m_blockControls = false;
+    int m_score = 0;
     
     std::list<Observer *> m_observers;
     
@@ -76,6 +77,7 @@ public:
     void onEndRemoving();
     
     void registerObserver(Observer *observer);
+    int getScore() {return m_score;}
     
     // for debug
     void printObjects();

@@ -13,6 +13,10 @@
 #include <string>
 #include "Utils.h"
 
+static const int C_FPS = 60;
+static const int C_DELAY_TIME = 1000.0f / C_FPS;
+
+static const double C_GAME_TIME = 60.0f;
 static const int C_BOARD_WIDTH = 8;
 static const int C_BOARD_HEIGHT = 8;
 static const int C_MIN_MATCH_COUNT = 3;
@@ -28,7 +32,30 @@ static const std::map<int,std::string> C_TYPES_MAP =
     {2, "Green"},
     {3, "Purple"},
     {4, "Red"},
-    {5, "Yellow"},
+    {5, "Yellow"}
 };
+
+static const std::map<int,int> C_SEQ_SCORE_MAP =
+{
+    {3, 50},
+    {4, 100},
+    {5, 150},
+    {6, 250},
+    {7, 500},
+    {8, 1000}
+};
+
+static const std::map<int,int> C_MATCHES_SCORE_MAP =
+{
+    {2, 50},
+    {3, 100},
+    {4, 150},
+    {5, 250},
+    {6, 350},
+    {7, 500},
+    {8, 750},
+    {9, 1000}
+};
+
 
 #endif /* defined(__MidasMiner__Consts__) */

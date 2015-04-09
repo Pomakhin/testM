@@ -38,7 +38,7 @@ private:
 protected:
     TextureManager(){};
 public:
-    
+    ~TextureManager();
     bool load(std::string fileName, std::string id, SDL_Renderer* pRenderer);
     void draw(std::string id, int x, int y, SDL_Renderer* pRenderer, int alpha = 255);
 };

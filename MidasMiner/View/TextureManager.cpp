@@ -50,5 +50,13 @@ void TextureManager::draw(std::string id, int x, int y, SDL_Renderer* pRenderer,
     SDL_SetTextureAlphaMod( texData.SDLTexture, alpha );
     SDL_RenderCopyEx(pRenderer, texData.SDLTexture, &srcRect,
                      &destRect, 0, 0, SDL_FLIP_NONE);
-    SDL_SetTextureAlphaMod( texData.SDLTexture, 255 );
+    //SDL_SetTextureAlphaMod( texData.SDLTexture, 255 );
+}
+
+TextureManager::~TextureManager()
+{
+    for (auto pair : m_textureMap)
+    {
+        SDL_DestroyTexture(pair.second.SDLTexture);
+    }
 }

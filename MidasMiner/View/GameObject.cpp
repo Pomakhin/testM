@@ -48,6 +48,10 @@ bool GameObject::update()
     bool result = false;
     if (m_xVelocity)
     {
+        if (m_acceleration > 0.0f)
+        {
+            m_xVelocity += Utils::sign(m_xVelocity) * m_acceleration;
+        }
         if (abs(m_pos.x + m_xVelocity - m_destination.x) < abs(m_xVelocity))
         {
             m_pos.x = m_destination.x;
@@ -61,6 +65,10 @@ bool GameObject::update()
     }
     if (m_yVelocity)
     {
+        if (m_acceleration > 0.0f)
+        {
+            m_yVelocity += Utils::sign(m_yVelocity) * m_acceleration;
+        }
         if (abs(m_pos.y + m_yVelocity - m_destination.y) < abs(m_yVelocity))
         {
             m_pos.y = m_destination.y;
@@ -90,7 +98,7 @@ void GameObject::load(const Point &pos, const std::string &textureId)
     m_textureId = textureId;
 }
 
-void GameObject::moveTo(const Point &toPos)
+void GameObject::moveTo(const Point &toPos, const float &acceleration)
 {
     if (m_pos != toPos)
     {
@@ -111,6 +119,7 @@ void GameObject::moveTo(const Point &toPos)
         {
             m_yVelocity = C_BASE_SPEED;
         }
+        m_acceleration = acceleration;
     }
 }
 
@@ -130,9 +139,9 @@ bool GameObjectDecorator::isIntersect(const Point &point)
 {
     return m_gameObject->isIntersect(point);
 }
-void GameObjectDecorator::moveTo(const Point &toPos)
+void GameObjectDecorator::moveTo(const Point &toPos, const float &acceleration)
 {
-    return m_gameObject->moveTo(toPos);
+    return m_gameObject->moveTo(toPos, acceleration);
 }
 Point GameObjectDecorator::getPos()
 {

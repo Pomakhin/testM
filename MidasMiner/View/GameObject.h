@@ -22,7 +22,7 @@ public:
     virtual bool update() = 0;
     virtual void load(const Point &pos, const std::string &textureId) = 0;
     virtual bool isIntersect(const Point &point) = 0;
-    virtual void moveTo(const Point &toPos) = 0;
+    virtual void moveTo(const Point &toPos, const float &acceleration = 0.0f) = 0;
     virtual Point getPos() = 0;
 };
 
@@ -34,6 +34,7 @@ protected:
     Point m_destination;
     float m_xVelocity = 0.0f;
     float m_yVelocity = 0.0f;
+    float m_acceleration = 0.0f;
     
     int m_alpha = 255;
     bool m_alphaIncrease = false;
@@ -42,7 +43,7 @@ public:
     virtual bool update() override;
     virtual void load(const Point &pos, const std::string &textureId) override;
     virtual bool isIntersect(const Point &point) override;
-    virtual void moveTo(const Point &toPos) override;
+    virtual void moveTo(const Point &toPos, const float &acceleration) override;
     virtual Point getPos() override {return m_pos;}
 };
 
@@ -57,7 +58,7 @@ public:
     virtual bool update() override;
     virtual void load(const Point &pos, const std::string &textureId) override;
     virtual bool isIntersect(const Point &point) override;
-    virtual void moveTo(const Point &toPos) override;
+    virtual void moveTo(const Point &toPos, const float &acceleration) override;
     virtual Point getPos() override;
 };
 

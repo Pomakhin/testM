@@ -12,6 +12,36 @@
 #include <vector>
 #include <map>
 
+namespace Utils
+{
+    template <typename T> int sign(T val) {
+        return (T(0) < val) - (val < T(0));
+    }
+
+};
+
+class Timer
+{
+public:
+    typedef std::function<void(int)> OnTimerFunction;
+    typedef std::function<void()> OnCompleteTimerFunction;
+private:
+    OnTimerFunction m_onTimer;
+    OnCompleteTimerFunction m_onCompleteTimerFunction;
+    double m_timeToStop;
+    int m_currentRest = 0;
+public:
+    void init(double a_timeToStop);
+    void setOnTimerFunction(OnTimerFunction a_onTimer);
+    void setOnCompleteTimerFunction(OnCompleteTimerFunction a_onComplete);
+    Timer();
+    bool isActive();
+    int getCurrentRest() {return m_currentRest;}
+    void update();
+    void stop();
+};
+
+
 struct Point
 {
     int x{};

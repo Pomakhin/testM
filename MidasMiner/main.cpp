@@ -12,6 +12,5 @@
 int main(int argc, const char * argv[])
 {
     GameController::getInstance()->init();
-    std::cout << "Hello, World!\n";
     return 0;
 }

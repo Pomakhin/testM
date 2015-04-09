@@ -11,12 +11,22 @@
 
 #include <stdio.h>
 #include "GenericSingleton.h"
+#include <SDL2/SDL.h>
+#include "Utils.h"
 
 class GameController : public Singleton<GameController>
 {
     friend class Singleton<GameController>;
 private:
-    void handleEvents();    
+    Timer m_timer;
+    
+    bool m_running = false;
+    Uint32 m_frameStart = 0;
+    Uint32 m_frameTime = 0;
+    Uint32 m_beginOfGame = 0;
+    
+    void handleEvents();
+    void newGame();
 protected:
     GameController(){};
 public:
