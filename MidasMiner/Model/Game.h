@@ -85,6 +85,9 @@ public:
     
     // for debug
     void printObjects();
+    
+    //for tests
+    void setTestBoard(const Board &board) {m_board = board;};
 };
 
 #endif /* defined(__MidasMiner__Game__) */

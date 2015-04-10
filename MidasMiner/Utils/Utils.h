@@ -70,13 +70,12 @@ struct Point
     }
 };
 
-
 // Board class also contains virtual part of game board that uses to create new game objects after matches removing
 class Board
 {
 private:
-    int m_width {};
-    int m_height {};
+    int m_width = 0;
+    int m_height = 0;
     std::vector<std::vector<int> > m_objects;
     
     // to uniformity consider out of board points as points with 0 value
@@ -88,7 +87,7 @@ public:
     int& operator() (const Point &pos);
     int  operator() (const Point &pos) const;
     int width() const;
-    int height() const ;
+    int height() const;
     
     // return map of objects surrounding given point (max 4)
     //  key - object type

@@ -316,7 +316,7 @@ bool Game::removeObjects()
     ObjectsPositionSet objectsToRemove = getObjectsToRemove(true);
     if (objectsToRemove.size())
     {
-        printObjects();
+        //printObjects();
         
         
         m_blockControls = true;
@@ -325,7 +325,8 @@ bool Game::removeObjects()
             m_board(pos) = 0;
         }
         
-        printObjects();
+        //printObjects();
+
         ObjectsMovesList dropsList;
         for (int x = 0; x < m_board.width(); x++)
         {
@@ -363,8 +364,6 @@ bool Game::removeObjects()
             }
         }
         
-        printObjects();
-        
         notify([dropsList](Observer *o){o->onRemoveObjects(dropsList);});
 
         for (auto pair : dropsList)
@@ -373,18 +372,11 @@ bool Game::removeObjects()
             m_board(pair.first) = 0;
         }
         
-        printObjects();
-        
         // for debug!!!
         for (int x = 0; x < m_board.width() - 1; x++)
         {
             for (int y = 0; y < m_board.height() - 1; y++)
             {
-                if (m_board(x,y) == 0)
-                {
-                    int i;
-                    i = 0;
-                }
                 assert(m_board(x,y) != 0);
             }
         }
