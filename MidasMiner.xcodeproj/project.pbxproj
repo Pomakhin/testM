@@ -8,18 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		CED2CB581AD3F0F300D343F6 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED2CB561AD3F0F300D343F6 /* TextureManager.cpp */; };
-		CED2CB601AD40C9700D343F6 /* BackGround.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5A1AD40C6D00D343F6 /* BackGround.jpg */; };
-		CED2CB611AD40C9700D343F6 /* Purple.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5B1AD40C6D00D343F6 /* Purple.png */; };
-		CED2CB621AD40C9700D343F6 /* Green.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5C1AD40C6D00D343F6 /* Green.png */; };
-		CED2CB631AD40C9700D343F6 /* Red.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5D1AD40C6D00D343F6 /* Red.png */; };
-		CED2CB641AD40C9700D343F6 /* Yellow.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5E1AD40C6D00D343F6 /* Yellow.png */; };
-		CED2CB651AD40C9700D343F6 /* Blue.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB5F1AD40C6D00D343F6 /* Blue.png */; };
 		CED2CB681AD40EBD00D343F6 /* GameView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED2CB661AD40EBD00D343F6 /* GameView.cpp */; };
 		CED2CB6C1AD40FA600D343F6 /* GameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED2CB6A1AD40FA600D343F6 /* GameController.cpp */; };
 		CED2CB731AD41D2500D343F6 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED2CB711AD41D2500D343F6 /* GameObject.cpp */; };
 		CED2CB7B1AD42BB500D343F6 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED2CB791AD42BB500D343F6 /* Utils.cpp */; };
 		CED2CB7D1AD6B44A00D343F6 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED2CB7C1AD6B44A00D343F6 /* SDL2_ttf.framework */; };
-		CED2CB7F1AD6B7F700D343F6 /* Arial.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED2CB7E1AD6B7D300D343F6 /* Arial.ttf */; };
 		CED2CB821AD6BCE300D343F6 /* TextLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CED2CB801AD6BCE300D343F6 /* TextLabel.cpp */; };
 		F04A35631AD0722700B6672C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F04A35621AD0722700B6672C /* main.cpp */; };
 		F04A356B1AD072CC00B6672C /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04A35691AD072CC00B6672C /* SDL2_image.framework */; };
@@ -35,6 +28,13 @@
 		F09392B71AD7537C00A5EF1E /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04A356A1AD072CC00B6672C /* SDL2.framework */; };
 		F09392B81AD754A400A5EF1E /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F04A35771AD07AF800B6672C /* Game.cpp */; };
 		F09392B91AD754A400A5EF1E /* Game.h in Sources */ = {isa = PBXBuildFile; fileRef = F04A35781AD07AF800B6672C /* Game.h */; };
+		F09577AB1AD76DBA00F38599 /* Arial.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = F09577A41AD76D9500F38599 /* Arial.ttf */; };
+		F09577AC1AD76DBA00F38599 /* BackGround.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = F09577A51AD76D9500F38599 /* BackGround.jpg */; };
+		F09577AD1AD76DBA00F38599 /* Blue.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F09577A61AD76D9500F38599 /* Blue.png */; };
+		F09577AE1AD76DBA00F38599 /* Green.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F09577A71AD76D9500F38599 /* Green.png */; };
+		F09577AF1AD76DBA00F38599 /* Purple.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F09577A81AD76D9500F38599 /* Purple.png */; };
+		F09577B01AD76DBA00F38599 /* Red.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F09577A91AD76D9500F38599 /* Red.png */; };
+		F09577B11AD76DBA00F38599 /* Yellow.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F09577AA1AD76D9500F38599 /* Yellow.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,13 +44,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				CED2CB7F1AD6B7F700D343F6 /* Arial.ttf in CopyFiles */,
-				CED2CB601AD40C9700D343F6 /* BackGround.jpg in CopyFiles */,
-				CED2CB611AD40C9700D343F6 /* Purple.png in CopyFiles */,
-				CED2CB621AD40C9700D343F6 /* Green.png in CopyFiles */,
-				CED2CB631AD40C9700D343F6 /* Red.png in CopyFiles */,
-				CED2CB641AD40C9700D343F6 /* Yellow.png in CopyFiles */,
-				CED2CB651AD40C9700D343F6 /* Blue.png in CopyFiles */,
+				F09577AB1AD76DBA00F38599 /* Arial.ttf in CopyFiles */,
+				F09577AC1AD76DBA00F38599 /* BackGround.jpg in CopyFiles */,
+				F09577AD1AD76DBA00F38599 /* Blue.png in CopyFiles */,
+				F09577AE1AD76DBA00F38599 /* Green.png in CopyFiles */,
+				F09577AF1AD76DBA00F38599 /* Purple.png in CopyFiles */,
+				F09577B01AD76DBA00F38599 /* Red.png in CopyFiles */,
+				F09577B11AD76DBA00F38599 /* Yellow.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +68,6 @@
 /* Begin PBXFileReference section */
 		CED2CB561AD3F0F300D343F6 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureManager.cpp; path = View/TextureManager.cpp; sourceTree = "<group>"; };
 		CED2CB571AD3F0F300D343F6 /* TextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureManager.h; path = View/TextureManager.h; sourceTree = "<group>"; };
-		CED2CB5A1AD40C6D00D343F6 /* BackGround.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = BackGround.jpg; path = Textures/BackGround.jpg; sourceTree = "<group>"; };
-		CED2CB5B1AD40C6D00D343F6 /* Purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Purple.png; path = Textures/Purple.png; sourceTree = "<group>"; };
-		CED2CB5C1AD40C6D00D343F6 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Green.png; path = Textures/Green.png; sourceTree = "<group>"; };
-		CED2CB5D1AD40C6D00D343F6 /* Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Red.png; path = Textures/Red.png; sourceTree = "<group>"; };
-		CED2CB5E1AD40C6D00D343F6 /* Yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Yellow.png; path = Textures/Yellow.png; sourceTree = "<group>"; };
-		CED2CB5F1AD40C6D00D343F6 /* Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Blue.png; path = Textures/Blue.png; sourceTree = "<group>"; };
 		CED2CB661AD40EBD00D343F6 /* GameView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameView.cpp; path = View/GameView.cpp; sourceTree = "<group>"; };
 		CED2CB671AD40EBD00D343F6 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameView.h; path = View/GameView.h; sourceTree = "<group>"; };
 		CED2CB6A1AD40FA600D343F6 /* GameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameController.cpp; path = Controller/GameController.cpp; sourceTree = "<group>"; };
@@ -85,7 +79,6 @@
 		CED2CB791AD42BB500D343F6 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utils.cpp; path = Utils/Utils.cpp; sourceTree = "<group>"; };
 		CED2CB7A1AD42BB500D343F6 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Utils/Utils.h; sourceTree = "<group>"; };
 		CED2CB7C1AD6B44A00D343F6 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
-		CED2CB7E1AD6B7D300D343F6 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Arial.ttf; path = Textures/Arial.ttf; sourceTree = "<group>"; };
 		CED2CB801AD6BCE300D343F6 /* TextLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextLabel.cpp; path = View/TextLabel.cpp; sourceTree = "<group>"; };
 		CED2CB811AD6BCE300D343F6 /* TextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextLabel.h; path = View/TextLabel.h; sourceTree = "<group>"; };
 		F04A355F1AD0722700B6672C /* MidasMiner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MidasMiner; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +92,13 @@
 		F09392AA1AD73E3500A5EF1E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F09392AF1AD73F5400A5EF1E /* gtest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gtest.framework; path = ../../../../Library/Frameworks/gtest.framework; sourceTree = "<group>"; };
 		F09392B11AD7478500A5EF1E /* GameTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameTest.cpp; sourceTree = "<group>"; };
+		F09577A41AD76D9500F38599 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Arial.ttf; path = Resources/Arial.ttf; sourceTree = "<group>"; };
+		F09577A51AD76D9500F38599 /* BackGround.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = BackGround.jpg; path = Resources/BackGround.jpg; sourceTree = "<group>"; };
+		F09577A61AD76D9500F38599 /* Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Blue.png; path = Resources/Blue.png; sourceTree = "<group>"; };
+		F09577A71AD76D9500F38599 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Green.png; path = Resources/Green.png; sourceTree = "<group>"; };
+		F09577A81AD76D9500F38599 /* Purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Purple.png; path = Resources/Purple.png; sourceTree = "<group>"; };
+		F09577A91AD76D9500F38599 /* Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Red.png; path = Resources/Red.png; sourceTree = "<group>"; };
+		F09577AA1AD76D9500F38599 /* Yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Yellow.png; path = Resources/Yellow.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,18 +126,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CED2CB591AD40C2F00D343F6 /* Textures */ = {
+		CED2CB591AD40C2F00D343F6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CED2CB7E1AD6B7D300D343F6 /* Arial.ttf */,
-				CED2CB5A1AD40C6D00D343F6 /* BackGround.jpg */,
-				CED2CB5B1AD40C6D00D343F6 /* Purple.png */,
-				CED2CB5C1AD40C6D00D343F6 /* Green.png */,
-				CED2CB5D1AD40C6D00D343F6 /* Red.png */,
-				CED2CB5E1AD40C6D00D343F6 /* Yellow.png */,
-				CED2CB5F1AD40C6D00D343F6 /* Blue.png */,
+				F09577A41AD76D9500F38599 /* Arial.ttf */,
+				F09577A51AD76D9500F38599 /* BackGround.jpg */,
+				F09577A61AD76D9500F38599 /* Blue.png */,
+				F09577A71AD76D9500F38599 /* Green.png */,
+				F09577A81AD76D9500F38599 /* Purple.png */,
+				F09577A91AD76D9500F38599 /* Red.png */,
+				F09577AA1AD76D9500F38599 /* Yellow.png */,
 			);
-			name = Textures;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		CED2CB691AD40F4100D343F6 /* Controller */ = {
@@ -186,7 +186,7 @@
 			children = (
 				CED2CB6D1AD4105D00D343F6 /* Utils */,
 				CED2CB691AD40F4100D343F6 /* Controller */,
-				CED2CB591AD40C2F00D343F6 /* Textures */,
+				CED2CB591AD40C2F00D343F6 /* Resources */,
 				F09392A01AD33ED500A5EF1E /* View */,
 				F04A35761AD07AD100B6672C /* Model */,
 				F04A35621AD0722700B6672C /* main.cpp */,
@@ -483,6 +483,7 @@
 				F09392AD1AD73E3500A5EF1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
